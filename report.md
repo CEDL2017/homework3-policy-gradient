@@ -14,8 +14,8 @@
    where the nn's output ```probs```(output of nn) is the logits of each action's probability conditioned on the ```self._observations```(input of nn)
 
 ## problem2 compute the surrogate loss
-In reinforcement learning, our goal is to maximize the accumulated discounted reward <img src='https://imgur.com/zNVb7qv'> .
-We want to maximize the reward, it's the same as minimize the negative reward. In problem 2 here, I added a line to compute the <b>negative</b> surrogate loss <img src='https://imgur.com/vZ393ks'>. and <b>minimize</b> it.
+In reinforcement learning, our goal is to maximize the accumulated discounted reward <img src='https://imgur.com/zNVb7qv.png'> .
+We want to maximize the reward, it's the same as minimize the negative reward. In problem 2 here, I added a line to compute the <b>negative</b> surrogate loss <img src='https://imgur.com/vZ393ks.png'>. and <b>minimize</b> it.
 
 ```python
 surr_loss = tf.reduce_mean((-log_prob)*self._advantages)
@@ -33,7 +33,7 @@ It's clear that the reward increases during training and terminated(converged) i
 <img src='pictures/p4.png'>
 The results without baseline converges faster(solved in 76 iterations) than the one with baseline. It's possible that in this task, the unstable of gradient somehow pushed the agent to act like "exploration" and thus finding the solution faster than with baseline subtraction one. 
 ## problem5 actor-critic implementation with bootstrapping
-   In Actor-Critic algorithm, actors takes actions based on policy-iteration and critics evaluates the actions based on value-iteration(Q-learning). Actor-Critic alorithm combines actor and critic where actor improves the current policy, and critic evaluates(criticizes) the current policy. Here in problem 5, we changed the advantage function in problem3 into <img src='https://imgur.com/ovyr0s7'> using one-step bootstrap in policy_gradient/util.py
+   In Actor-Critic algorithm, actors takes actions based on policy-iteration and critics evaluates the actions based on value-iteration(Q-learning). Actor-Critic alorithm combines actor and critic where actor improves the current policy, and critic evaluates(criticizes) the current policy. Here in problem 5, we changed the advantage function in problem3 into <img src='https://imgur.com/ovyr0s7.png'> using one-step bootstrap in policy_gradient/util.py
 ```python
    new_b = np.append(b[1:], 0)
    return x + discount_rate * new_b
@@ -44,9 +44,9 @@ The boostrapping actor-critic agent doesn't converge since it's not stable enoug
 <img src ='pictures/p5.png'>
 ## Problem6 generalized advantage estimation (GAE)
 Since the original actor-critic is not stable, in problem6, we introduce λ to compromise the advantage function based on problem3 and 5.
-Assume the <img src='https://imgur.com/qjRZqX8'> represent the i-step bootstrapping (e.g. <img src='https://imgur.com/jViBLdI'>). The generalized advantage estimation will be:
+Assume the <img src='https://imgur.com/qjRZqX8.png'> represent the i-step bootstrapping (e.g. <img src='https://imgur.com/jViBLdI.png'>). The generalized advantage estimation will be:
 
-<img src='https://imgur.com/6AQ2kDs'>
+<img src='https://imgur.com/6AQ2kDs.png'>
 
 Here we use ```util.discount``` to calculate the advantages by discount_rate and LAMBDA
 
