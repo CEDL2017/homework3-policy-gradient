@@ -33,17 +33,25 @@ It's clear that the reward increases during training and terminated(converged) i
 <img src='pictures/p4.png'>
 The results without baseline converges faster(solved in 76 iterations) than the one with baseline. It's possible that in this task, the unstable of gradient somehow pushed the agent to act like "exploration" and thus finding the solution faster than with baseline subtraction one. 
 ## problem5 actor-critic implementation with bootstrapping
-   In Actor-Critic algorithm, actors takes actions based on policy-iteration and critics evaluates the actions based on value-iteration(Q-learning). Actor-Critic alorithm combines actor and critic where actor improves the current policy, and critic evaluates(criticizes) the current policy. Here in problem 5, I implemented actor-critic agent with boostrapping in policy_gradient/util.py
+   In Actor-Critic algorithm, actors takes actions based on policy-iteration and critics evaluates the actions based on value-iteration(Q-learning). Actor-Critic alorithm combines actor and critic where actor improves the current policy, and critic evaluates(criticizes) the current policy. Here in problem 5, we changed the advantage function in problem3 into $A_t^i = r_t^i + \gamma*V_{t+1}^i - V_t^i$ using one-step bootstrap in policy_gradient/util.py
 ```python
    new_b = np.append(b[1:], 0)
    return x + discount_rate * new_b
 ```
-and call the function in ```PolicyOptimizer_actor_critic```:
+,which replaced the total reward by immediate reward and the estimated baseline.
+
+The boostrapping actor-critic agent doesn't converge since it's not stable enough.
+<img src ='pictures/p5.png'>
+## Problem6 generalized advantage estimation (GAE)
+Since the original actor-critic is not stable, in problem6, we introduce λ to compromise the advantage function based on problem3 and 5.
+Assume the $\delta_t^i$ represent the i-step bootstrapping (e.g. $\delta_t^i=r_t^i + \gamma*V_{t+1}^i - V_t^i$). The generalized advantage estimation will be:
+
+$$A_{t}^{GAE} = \sum_{l=0}^{\infty} (\gamma\lambda)^l \delta_{t+1}$$
+
+Here we use ```util.discount``` to calculate the advantages by discount_rate and LAMBDA
 
 ```python
-    r = util.discount_bootstrap(p["rewards"], self.discount_rate, b)
-    target_v = util.discount_cumsum(p["rewards"], self.discount_rate)
-    a = r - b
+a = util.discount(a, self.discount_rate * LAMBDA)
 ```
-The boostrapping actor-critic agent converged in 73 episodes.
-<img src ='pictures/p5.png'>
+The GAE agent converged in 73 episodes.
+<img src ='pictures/p6.png'>
