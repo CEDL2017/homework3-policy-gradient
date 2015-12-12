@@ -1,6 +1,6 @@
 # Homework3-Policy-Gradient report
 ## problem1 construct a neural network to represent policy
-   In more complex tasks(atari games, and even in real-world tasks), it's hard to apply policy iteration/ value iteration directly due to large state/action space, requiring large storage and hard to calculate the Q values for all. So we "learn" the Q values or plicy by neural network. Here in problem 1, we want to use a simple neural network \begin f_{Q^*} (s, a;\Theta) $ to represent $ Q^* (s, a) \end where $\Theta$ is the parameters of the nerual network, just like the figure showed below:
+   In more complex tasks(atari games, and even in real-world tasks), it's hard to apply policy iteration/ value iteration directly due to large state/action space, requiring large storage and hard to calculate the Q values for all. So we "learn" the Q values or plicy by neural network. Here in problem 1, we want to use a simple neural network <img src="https://latex.codecogs.com/gif.latex? f_{Q^*} (s, a;\Theta)"> to represent $ Q^* (s, a) \end where $\Theta$ is the parameters of the nerual network, just like the figure showed below:
    <img src='pictures/DNNforQ.png' width='300'>
    
    To implement this, I added two fully connected layers in policy.py file:
