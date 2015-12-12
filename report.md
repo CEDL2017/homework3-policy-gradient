@@ -1,14 +1,14 @@
 # Homework3-Policy-Gradient report
 ## problem1 construct a neural network to represent policy
-   In more complex tasks(atari games, and even in real-world tasks), it's hard to apply policy iteration/ value iteration directly due to large state/action space, requiring large storage and hard to calculate the Q values for all. So we "learn" the Q values or plicy by neural network. Here in problem 1, we want to use a simple neural network $ f_{Q^*} (s, a;\Theta) $ to represent $ Q^* (s, a) $ where $\Theta$ is the parameters of the nerual network, just like the figure showed below:
+   In more complex tasks(atari games, and even in real-world tasks), it's hard to apply policy iteration/ value iteration directly due to large state/action space, requiring large storage and hard to calculate the Q values for all. So we "learn" the Q values or plicy by neural network. Here in problem 1, we want to use a simple neural network \begin f_{Q^*} (s, a;\Theta) $ to represent $ Q^* (s, a) \end where $\Theta$ is the parameters of the nerual network, just like the figure showed below:
    <img src='pictures/DNNforQ.png' width='300'>
    
    To implement this, I added two fully connected layers in policy.py file:
-   ```python
+```python
     fc1 = tf.contrib.layers.fully_connected(self._observations, num_outputs=hidden_dim, activation_fn = tf.tanh)
     fc2 = tf.contrib.layers.fully_connected(fc1, num_outputs=out_dim, activation_fn=None)
     probs = tf.nn.nsoftmax(fc2)
-    ```
+```
    
    
    where the nn's output ```probs```(output of nn) is the logits of each action's probability conditioned on the ```self._observations```(input of nn)
