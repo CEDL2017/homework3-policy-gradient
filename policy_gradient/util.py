@@ -31,7 +31,15 @@ def discount_bootstrap(x, discount_rate, b):
              (the shape of it should be the same as the `x` and `b`)
     Sample code should be about 3 lines
     """
-    # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    # YOUR CODE >>>>>>>>>>>>>>>>>>>    
+    y = x - b
+    # left shift
+    tmp = np.copy(b)
+    b[:-1] = tmp[1:]
+    b[-1] = 0.0
+
+    y += discount_rate * b
+    return y
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
 def plot_curve(data, key, filename=None):
