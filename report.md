@@ -1,6 +1,6 @@
 # Homework3-Policy-Gradient report
 
-## (105061583 賴承薰)
+## 105061583 賴承薰
 
 ### Envs
 * python 3.5
@@ -48,7 +48,6 @@ p["advantages"] = (a - a.mean()) / (a.std() + 1e-8) # normalize
 <img src="LFbaseline_iter.png" width="50%" align="middle"/>
 <img src="LFbaseline_curve.png" width="65%"/>
 
--------------------------------------------------------------------------------------------------------------------
 
 #### Problem 4: remove the baseline and compare the variance and performance before and after adding baseline
 
@@ -56,9 +55,14 @@ p["advantages"] = (a - a.mean()) / (a.std() + 1e-8) # normalize
 <img src="none_curve.png" width="65%"/>
 
 調整gradient的時候，會連帶增加具有positive reward的trajectory的機率，同時減少negative reward的trajectory的機率。
-假設所有的policy都是positive reward，我們一旦調整gradient的時候就會讓所有選擇的概率都一起上升，使我們比較容易選到沒有那麼好的policy。
-如果加上baseline可以視為一個分水嶺把reward沒有那麼高的選擇區別為壞的，減少選到小於b的機率。
-由於gradient是target function的first deriviate，這會需要考慮step size，萬一step size過大，update出來的policy表現一下下降很多，又根據不好的policy去選擇trajectory，又根據不好的trajectory去做更新，不好的表現就會propagate，這樣一來policy的variance就會很大。
+
+假設所有的policy都是positive reward，一旦調整gradient，就會讓所有選擇的概率都一起上升，使我們比較容易選到沒有那麼好的policy。
+
+如果加上baseline可以視為一個分水嶺，把reward沒有那麼高的選擇區別為壞的，減少選到小於b的機率。
+由於gradient是target function的first deriviate，這會需要考慮step size，萬一step size過大，update出來的policy表現一下下降很多，又根據不好的policy去選擇trajectory，再接著根據不好的trajectory去做更新，不好的表現就會propagate，這樣一來policy的variance就會很大。
+
+
+-------------------------------------------------------------------------------------------------------------------
 
 #### Problem 5: Actor-Critic algorithm (with bootstrapping)
 
