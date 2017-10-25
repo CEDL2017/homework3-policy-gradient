@@ -5,8 +5,8 @@ TA: try to elaborate the algorithms that you implemented and any details worth m
 
 <table border=1>
 <td>
-<img src="prob1~3_loss.png" width="24%"/>
-<img src="prob1~3_return.png"  width="24%"/>
+<img src="prob1~3_loss.png" width="30%"/>
+<img src="prob1~3_return.png"  width="30%"/>
 </td>
 </table>
 
