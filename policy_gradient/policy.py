@@ -32,7 +32,7 @@ class CategoricalPolicy(object):
         # YOUR CODE HERE >>>>>>
 
         h1 = tf.contrib.layers.fully_connected(inputs = self._observations, num_outputs = hidden_dim, activation_fn = tf.nn.tanh)
-        probs = tf.contrib.layers.fully_connected(inputs = h2, num_outputs = out_dim, activation_fn = tf.nn.softmax)
+        probs = tf.contrib.layers.fully_connected(inputs = h1, num_outputs = out_dim, activation_fn = tf.nn.softmax)
         # <<<<<<<<
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
