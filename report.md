@@ -5,22 +5,22 @@ TA: try to elaborate the algorithms that you implemented and any details worth m
 
 <table border=1>
 <tr>
-<td>
+
 <img src="prob1~3_loss.png" width="24%"/>
 <img src="prob1~3_return.png"  width="24%"/>
-</td>
+
 </tr>
 
 </table>
 
 
 <table border=2>
-<tr>
+
 <td>
 <img src="prob1~3_loss_none.png" width="24%"/>
 <img src="prob1~3_return_none.png"  width="24%"/>
 </td>
-</tr>
+
 
 </table>
 
