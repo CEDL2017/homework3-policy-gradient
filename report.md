@@ -21,7 +21,7 @@ The first layer is activated by tanh, the second layer outputs the sofmaxed resu
 
 ```
 h1 = tf.contrib.layers.fully_connected(inputs = self._observations, num_outputs = hidden_dim, activation_fn = tf.nn.tanh)
-probs = tf.contrib.layers.fully_connected(inputs = h2, num_outputs = out_dim, activation_fn = tf.nn.softmax)
+probs = tf.contrib.layers.fully_connected(inputs = h1, num_outputs = out_dim, activation_fn = tf.nn.softmax)
 ```
 
 #### Problem 2: compute the surrogate loss
