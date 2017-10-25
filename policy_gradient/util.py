@@ -35,10 +35,10 @@ def discount_bootstrap(x, discount_rate, b):
     y = x - b
     # left shift
     tmp = np.copy(b)
-    b[:-1] = tmp[1:]
-    b[-1] = 0.0
+    tmp[:-1] = b[1:]
+    tmp[-1] = 0.0
 
-    y += discount_rate * b
+    y += discount_rate * tmp
     return y
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
