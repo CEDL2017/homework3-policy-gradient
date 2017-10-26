@@ -1,5 +1,9 @@
 # Homework3-Policy Gradient
 
+## Reference
+https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/5-1-policy-gradient-softmax1/
+
+## Homework3-Policy Gradient
 In this homework, you will use a neural network to learn a parameterize policy that can select action without consulting a value function. A value function may still be used to learn the policy weights, but is not required for action selection. 
 
 There are some advantage of the policy-based algorithms:
