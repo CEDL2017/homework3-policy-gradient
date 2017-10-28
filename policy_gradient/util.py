@@ -32,6 +32,10 @@ def discount_bootstrap(x, discount_rate, b):
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    rolled_b = np.roll(b,len(x)-1)
+    rolled_b[-1] = 0
+    y = x + (discount_rate*rolled_b)
+    return y
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
 def plot_curve(data, key, filename=None):
@@ -47,4 +51,3 @@ def plot_curve(data, key, filename=None):
 
 def discount(x, discount_factor):
     return scipy.signal.lfilter([1.0], [1.0, -discount_factor], x[::-1])[::-1]
-
