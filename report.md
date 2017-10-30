@@ -16,8 +16,6 @@ In Q6, a novel advantage function called "Generalized Advantage Estimation", whi
 
 ## Q1 : construct a neural network to represent policy
 
-### Algorithm
-
 Use TensorFlow to construct a 2-layer neural network as stochastic policy.
 
 Assign the output of the softmax layer to the variable `probs`.
@@ -34,8 +32,6 @@ I added 2 lines in policy.py to implement a 2 layer
 </code>
 
 ## Q2 : compute the surrogate loss
-
-### Algorithm
 
 
 
