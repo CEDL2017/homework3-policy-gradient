@@ -33,7 +33,13 @@ I added 2 lines in policy.py to implement a 2 layer
 
 ## Q2 : compute the surrogate loss
 
+surrogate loss:
 
+<p align="center"><img src="sur_loss.PNG" width=80%  height=80%/></p>
+
+accumulated discounted rewards:
+
+<p align="center"><img src="acc_dis_rewards.PNG" width=80%  height=80%/></p>
 
 ### Code
 
@@ -49,6 +55,10 @@ I added 1 line in policy.py to compute surrogate loss and assign it to variable 
 ## Q3 : Use baseline to reduce the variance of our gradient estimate
 
 ### Algorithm
+
+With bias:
+
+<p align="center"><img src="RL_loss.PNG" width=80%  height=80%/></p>
 
 ### Code
 
@@ -186,6 +196,8 @@ But the baseline can reduce the variance of the gradient estimator.
 
 ### Code
 
+run the code below
+
 <code>
 
     sess.run(tf.global_variables_initializer())
@@ -306,6 +318,13 @@ But the baseline can reduce the variance of the gradient estimator.
 
 ### Algorithm
 
+Assume that :
+
+<p align="center"><img src="general1.PNG" width=80%  height=80%/></p>
+
+then Generalized advantage estimator is defined as:
+
+<p align="center"><img src="general2.PNG" width=80%  height=80%/></p>
 
 
 ### Code
