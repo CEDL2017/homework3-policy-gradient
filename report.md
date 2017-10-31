@@ -1,7 +1,5 @@
 # Homework3-Policy-Gradient report
 
-TA: try to elaborate the algorithms that you implemented and any details worth mentioned.
-
 ## Problem 1~3
 
 <table border=1>
@@ -11,6 +9,7 @@ TA: try to elaborate the algorithms that you implemented and any details worth m
 </td>
 </table>
 
+## Problem 4
 
 <table border=2>
 <td>
@@ -19,9 +18,19 @@ TA: try to elaborate the algorithms that you implemented and any details worth m
 </td>
 </table>
 
+## Problem 5
 <table border=3>
 <td>
-<img src="prob5~6_loss.png" width="40%"/>
-<img src="prob5~6_return.png"  width="40%"/>
+<img src="prob5_loss.png" width="40%"/>
+<img src="prob5_return.png"  width="40%"/>
+</td>
+</table>
+
+# Problem 6
+
+<table border=4>
+<td>
+<img src="prob6_loss.png" width="40%"/>
+<img src="prob6_return.png"  width="40%"/>
 </td>
 </table>
