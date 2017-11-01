@@ -32,6 +32,7 @@ def discount_bootstrap(x, discount_rate, b):
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
 def plot_curve(data, key, filename=None):
