@@ -16,15 +16,15 @@
 
 #### Problem 1: construct a neural network to represent policy
 
-According to the instruction, there should be two hidden layer in the NN.
-The first layer is activated by tanh, the second layer outputs the sofmaxed result which is named 'probs'
+According to the instruction, there should be two hidden layers in the neural network.
+The first layer is activated by `tanh`, the second layer outputs the `sofmax`ed result which is named 'probs'
 
 ```
 h1 = tf.contrib.layers.fully_connected(inputs = self._observations, num_outputs = hidden_dim, activation_fn = tf.nn.tanh)
 probs = tf.contrib.layers.fully_connected(inputs = h1, num_outputs = out_dim, activation_fn = tf.nn.softmax)
 ```
 
-#### Problem 2: compute the surrogate loss
+#### Problem 2: Compute the surrogate loss
 
 By the REINFORCE algorithm, we can obtain the empirical policy gradient and update the gradient step by step.
 We can first construct the computation graph for  L(θ) , and then take its gradient as the empirical policy gradient.
@@ -49,7 +49,7 @@ p["advantages"] = (a - a.mean()) / (a.std() + 1e-8) # normalize
 <img src="LFbaseline_curve.png" width="65%"/>
 
 
-#### Problem 4: remove the baseline and compare the variance and performance before and after adding baseline
+#### Problem 4: Remove the baseline and compare the variance and performance before and after adding baseline
 
 <img src="none_iter.png" width="50%" align="middle"/>
 <img src="none_curve.png" width="65%"/>
@@ -66,7 +66,10 @@ p["advantages"] = (a - a.mean()) / (a.std() + 1e-8) # normalize
 
 #### Problem 5: Actor-Critic algorithm (with bootstrapping)
 
-Implement the function discount bootstrap in a simple actor-critic algorithm
+Implement the function discount bootstrap in a simple actor-critic algorithm.
+
+Actor-critic algorithm update the policy evry timestep, making it faster than traditional policy gradient algorithm and harder to converge.
+
 
 ```
 y = np.zeros(len(x))
