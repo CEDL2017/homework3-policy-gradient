@@ -30,15 +30,8 @@ class CategoricalPolicy(object):
 
         Sample solution is about 2~4 lines.
         """
-        # obser_flat = tf.reshape(self._observations, [-1,])
         dense_1 = tf.layers.dense(inputs=self._observations, units=hidden_dim, activation=tf.nn.tanh)
         probs = tf.layers.dense(inputs=dense_1, units=out_dim, activation=tf.nn.softmax)
-        #probs = tf.nn.softmax(dense_2, name="softmax_tensor")
-        
-        #tf.reset_default_graph()
-        #dense_1 = slim.fully_connected(slim.flatten(self._observations),hidden_dim,activation_fn=tf.nn.tanh)
-        #dense_2 = slim.fully_connected(slim.flatten(dense_1),hidden_dim,activation_fn=tf.nn.relu)
-        #probs = tf.nn.softmax(dense_2, name="softmax_tensor")
 
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
@@ -67,10 +60,10 @@ class CategoricalPolicy(object):
 
         # Add 1e-8 to `probs_vec` so as to prevent log(0) error
         log_prob = tf.log(probs_vec + 1e-8)
-        print(probs.shape)
+        #print(probs.shape)
         #print(log_prob)
         #print(self._advantages)
-        print(probs_vec.shape)
+        #print(probs_vec.shape)
 
         """
         Problem 2:
