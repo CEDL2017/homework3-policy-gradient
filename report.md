@@ -109,9 +109,7 @@ actor : update θ </br>
 
 where the ϕ(s, a) is just the linear function approximation of Q(s, a), and α, β are just the constant. And δ is the same as the definition in problem-6.
 
-Now we start to discuss on the bootstrap idea.
-
-Here we can see that our advantage function is using the idea of bootstrapping, however, in this problem, I feel like it's pretty easy to sample out some policies which are really bad. Therefore, if we use the bootstrap approach, it seems that it need more iteration to achieve the reward over 195. (So far it can't reach 195 within 200 iterations)</br>
+Here we know that our advantage function is using the idea of bootstrapping, however, in this problem, I feel like it's pretty easy to sample out some policies which are really bad. Therefore, if we use the bootstrap approach, it seems that it need more iteration to achieve the reward over 195. (So far it can't reach 195 within 200 iterations)</br>
 
 The result are as follows:</br>
 <div align="center">
