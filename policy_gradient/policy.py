@@ -1,4 +1,5 @@
 import tensorflow as tf
+import tensorflow.contrib.slim as slim
 import numpy as np
 
 # In this Lab, we just use categorical policy, which used for MDPs with discrete action space
@@ -29,8 +30,8 @@ class CategoricalPolicy(object):
 
         Sample solution is about 2~4 lines.
         """
-        # YOUR CODE HERE >>>>>>
-        # <<<<<<<<
+        dense_1 = tf.layers.dense(inputs=self._observations, units=hidden_dim, activation=tf.nn.tanh)
+        probs = tf.layers.dense(inputs=dense_1, units=out_dim, activation=tf.nn.softmax)
 
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
@@ -59,6 +60,10 @@ class CategoricalPolicy(object):
 
         # Add 1e-8 to `probs_vec` so as to prevent log(0) error
         log_prob = tf.log(probs_vec + 1e-8)
+        #print(probs.shape)
+        #print(log_prob)
+        #print(self._advantages)
+        #print(probs_vec.shape)
 
         """
         Problem 2:
@@ -71,9 +76,13 @@ class CategoricalPolicy(object):
 
         Sample solution is about 1~3 lines.
         """
-        # YOUR CODE HERE >>>>>>
-        # <<<<<<<<
-
+        # self._advantages = R_t^i
+        #surr_loss = 0
+        #for n in range(probs.shape[1]):
+        #    surr_loss += log_prob[n]*self._advantages
+        surr_loss = -tf.reduce_mean(log_prob * self._advantages)
+        
+        
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
 
