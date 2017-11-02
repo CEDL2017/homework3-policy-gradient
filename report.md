@@ -20,19 +20,19 @@ probs = tf.layers.dense(hidden_layer, out_dim, activation=tf.nn.softmax)
 
 * Problem 2: Compute the surrogate loss
 
-- accumulated discounted rewards
+accumulated discounted rewards
 
 <img src="imgs/discount_cumsum.png"/>
 
-- the empirical policy gradient
+the empirical policy gradient
 
 <img src="imgs/policy_gradient.png"/>
 
-- surrogate loss
+surrogate loss
 
 <img src="imgs/surr_loss.png"/>
 
-- gradient ascent
+gradient ascent
 
 <img src="imgs/gradient_ascent.png"/>
 
@@ -60,7 +60,7 @@ a = r - b
 
 > The following statistics represent average variance of advantage (odd lines) and average return for each iteration (even lines). (only show the first and the last 5 iterations)
 
-- With baseline
+### With baseline
 
 + Variance: low (lower and lower)
 
@@ -95,7 +95,7 @@ Iteration 65: Average Return = 196.53
 
 <img src="imgs/result_vanilla_with_baseline.png"/>
 
-- Without baseline
+### Without baseline
 
 + Variance: very high (higher and higher)
 
@@ -149,7 +149,7 @@ def discount_bootstrap(x, discount_rate, b):
 	return y
 ```
 
-- Results
+### Results
 
 + Variance: very low
 
@@ -197,7 +197,7 @@ Iteration 200: Average Return = 173.41
 a = util.discount(a, self.discount_rate * LAMBDA)
 ```
 
-- Results
+### Results
 
 + Variance: high (higher and higher)
 
