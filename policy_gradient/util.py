@@ -22,6 +22,7 @@ def discount_cumsum(x, discount_rate):
     return discounted_r[::-1]
 
 def discount_bootstrap(x, discount_rate, b):
+    
     """
     Args:
         x: the immediate reward for each timestep. e.g. [1, 1, 0]
@@ -31,9 +32,12 @@ def discount_bootstrap(x, discount_rate, b):
              (the shape of it should be the same as the `x` and `b`)
     Sample code should be about 3 lines
     """
+    
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    b_ = np.append(b[1:], 0)
+    return x + discount_rate * b_
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
- 
+
 def plot_curve(data, key, filename=None):
     # plot the surrogate loss curve
     x = np.arange(len(data))
@@ -47,4 +51,3 @@ def plot_curve(data, key, filename=None):
 
 def discount(x, discount_factor):
     return scipy.signal.lfilter([1.0], [1.0, -discount_factor], x[::-1])[::-1]
-
