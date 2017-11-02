@@ -18,10 +18,10 @@ Unlike previous MDP problrms we have seen, whose definition of all state transit
 Simple description of CartPole: </br>
 <img src="https://cloud.githubusercontent.com/assets/7057863/19025154/dd94466c-8946-11e6-977f-2db4ce478cf3.gif" width="400" height="200" />
 
-**Goal** : Keep the pole not falling </br>
-**Rule** : The pole is sticked to a cart, and we can move the cart toward left or right (+1, -1), in order to prevent the pole fall.</br>
-**Reward** : Always 1 in every time step</br>
-**End** : When the the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.
+**- Goal** : Keep the pole not falling </br>
+**- Rule** : The pole is sticked to a cart, and we can move the cart toward left or right (+1, -1), in order to prevent the pole fall.</br>
+**- Reward** : Always 1 in every time step</br>
+**- End** : When the the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.
 
 The following will describe a standard way of policy gradient approach, and 2 improvements of policy gradient, which are Actor-Critic algorithm and the GAE approach respectively.
 
@@ -98,13 +98,27 @@ The result after adding the idea of baseline: </br>
 </div>
 
 We can see from the above figure that the oscillation of loss in "before adding the idea of baseline" is quite strong than the result "after adding the idea of baseline". This means that the variance of the result without baseline is large than the result with baseline. </br></br>
-The reason is that after we substracting the baseline from the policy gradient, we somehow **rescale the reward**. Just like the example I mentioned above in the **"1-2. Adding the idea of baseline"** part, if we didn't apply baseline, each time the direction we update would possibly be a pretty large amount (e.g. proportion to ∇(10001)), and that is where the variance comes from.
-
-</br>
-
+The reason is that after we substracting the baseline from the policy gradient, we somehow **rescale the reward**. Just like the example I mentioned above in the **"1-2. Adding the idea of baseline"** part, if we didn't apply baseline, each time the direction we update would possibly be a pretty large amount (e.g. proportion to ∇(10001)), and that is where the variance comes from.</br>To know more details please also refer to the [code](./Lab3-policy-gradient.ipynb)</br></br>
 ### 2. Actor-Critic algorithm
 
-Actually the actor-critic algorithm 
+The idea of Actor-Critic algorithm can be divided into 2 parts, one is **Actor** the other is **Critic**. Basically, the Actor will update the parameter base on the advice given by the Critic. We can write the idea as follows : </br></br>
+critic: update w </br>
+![ac-eq1](https://latex.codecogs.com/gif.latex?w%20%5Cleftarrow%20w%20&plus;%20%5Cbeta*%5Cdelta*%5Cphi%28s%2C%20a%29)</br></br>
+actor : update θ </br>
+![ac-eq2](https://latex.codecogs.com/gif.latex?%5Ctheta%20%5Cleftarrow%20%5Ctheta%20&plus;%20%5Calpha*%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20Q_w%28s%2C%20a%29)
+
+where the ϕ(s, a) is just the linear function approximation of Q(s, a), and α, β are just the constant. And δ is the same as the definition in problem-6.
+
+Now we start to discuss on the bootstrap idea.
+
+Here we can see that our advantage function is using the idea of bootstrapping, however, in this problem, I feel like it's pretty easy to sample out some policies which are really bad. Therefore, if we use the bootstrap approach, it seems that it need more iteration to achieve the reward over 195. (So far it can't reach 195 within 200 iterations)</br>
+
+The result are as follows:</br>
+<div align="center">
+<img src = "./output_figure/prob5_loss.png" height="200px">
+<img src = "./output_figure/prob5_avereturn.png" height="200px">
+</div>
+
 
 To know more details please also refer to the [code](./Lab3-policy-gradient.ipynb)
 
