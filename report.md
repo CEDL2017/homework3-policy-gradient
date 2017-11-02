@@ -40,7 +40,7 @@ which : &nbsp;&nbsp;&nbsp;&nbsp;
 The way we parameterize the policy is using a 2-layer shallow neural network, and later base on the formula to calculate the surrogate loss(We use the reduce_mean function to implement it). Code detail please refer to [policy.py](./policy_gradient/policy.py). </br></br>
 
 #### 1-2. Adding the idea of baseline
-The idea of substracting the baseline from the policy gradient is that we care about the **relative different** instead of the actual q-value(Big capital R in this case) we get. For example if we got R = 10001 this time while got R = 9999 in the next time, then base on the policy gradient formula, we will update our theta in proportion to ∇(10001) this time and update our theta in proportion to ∇(9999) next time. However, it is obvious that in this way, the updated direction varies a lot! What we really want is update our theta in proportion to ∇(1) this time and update our theta in proportion to ∇(-1) next time for example. That is the idea of baseline come from, in other words, we **rescale our reward** in order to decrease the variance of our estimation. </br></br>
+The idea of substracting the baseline from the policy gradient is that we care about the **relative difference** instead of the actual q-value(Big capital R in this case) we get. For example if we got R = 10001 this time-step while got R = 9999 in the next time-step, then base on the policy gradient formula, we will update our theta in proportion to ∇(10001) this time-step and update our theta in proportion to ∇(9999) next time-step. However, it is obvious that in this way, the updated direction varies a lot! What we really want is update our theta in proportion to ∇(1) this time-step and update our theta in proportion to ∇(-1) next time-step for example. That is the idea of baseline come from, in other words, we **rescale our reward** in order to decrease the variance of our estimation. </br></br>
 One good choice of baseline function is actually the state-value function, **V**. The reason is that we can interpret the state-value function as the **average or usual reward** we got, and by substracting the state-value function from the policy gradient, we can have a conept of **how much more reward we can get with respect to the usual reward** base on the certain sampled policy.</br></br>
 The result are as follows:</br>
 <div align="center">
@@ -52,7 +52,7 @@ To know more details please refer to the [code](./Lab3-policy-gradient.ipynb)</b
 
 #### 1-3. Why baseline won't introduce bias
 
-The idea is that we want to **reduce the variance** but we **don't want to change the expectation result**.(Described in the **Basic Idea Part** above, which the surrogate loss is actually the result of taking the expectation of log(pi)*q(s,a)). If the baseline function can remain the expectation in the same value, then we can comfirm that by substracting the baseline from the policy gradient, we can not only reduce variance but also make sure the bias didn't increase. In other words, we want to see the following equation: </br></br>
+Our goal is to **reduce the variance** but we **don't want to change the expectation result**.(Described in the **Basic Idea Part** above, which the surrogate loss is actually the result of taking the expectation of log(pi)*q(s,a)). If the baseline function can remain the expectation in the same value, then we can comfirm that by substracting the baseline from the policy gradient, we can not only reduce variance but also make sure the bias didn't increase. In other words, we want to see the following equation: </br></br>
 ![baseline](https://latex.codecogs.com/gif.latex?%5Cnabla_%5Ctheta%20L%28%5Ctheta%29%20%3D%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20R%5D%20%3D%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20%28R%20-%20B%28s%29%29%5D)
 
 which B(s) is the baseline function. The proof is as follows:</br></br>
@@ -97,8 +97,9 @@ The result after adding the idea of baseline: </br>
 <img src = "./output_figure/prob3_avereturn.png" height="200px">
 </div>
 
-We can see from the above figure that the oscillation of loss in "before adding the idea of baseline" is quite strong than the result "after adding the idea of baseline". This means that the variance of the result without baseline is large than the result with baseline. </br></br>
-The reason is that after we substracting the baseline from the policy gradient, we somehow **rescale the reward**. Just like the example I mentioned above in the **"1-2. Adding the idea of baseline"** part, if we didn't apply baseline, each time the direction we update would possibly be a pretty large amount (e.g. proportion to ∇(10001)), and that is where the variance comes from.</br>To know more details please also refer to the [code](./Lab3-policy-gradient.ipynb)</br></br>
+We can see from the above figure that the oscillation of loss in "before adding the idea of baseline" is quite strong than the result "after adding the idea of baseline". This means that the variance of the result without baseline is larger than the result with baseline. </br></br>
+The reason is that after we substracting the baseline from the policy gradient, we somehow **rescale the reward**. Just like the example I mentioned above in the **"1-2. Adding the idea of baseline"** part, if we didn't apply baseline, each time the direction we update would possibly be a pretty large amount (e.g. proportion to ∇(10001)), and that is where the variance comes from.</br></br>
+To know more details please also refer to the [code](./Lab3-policy-gradient.ipynb)</br></br>
 ### 2. Actor-Critic algorithm
 
 The idea of Actor-Critic algorithm can be divided into 2 parts, one is **Actor** the other is **Critic**. Basically, the Actor will update the parameter base on the advice given by the Critic. We can write the idea as follows : </br></br>
