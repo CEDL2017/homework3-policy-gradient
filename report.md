@@ -56,7 +56,7 @@ a = r - b
 ```
 
 
-* Problem 4: Compare the variance and performance before and after adding baseline
+### Problem 4: Compare the variance and performance before and after adding baseline
 
 > The following statistics represent average variance of advantage (odd lines) and average return for each iteration (even lines). (only show the first and the last 5 iterations)
 
