@@ -57,3 +57,5 @@ def discount(x, discount_factor):
 #a = np.roll(a, -5)
 #print(a)
 
+
+
