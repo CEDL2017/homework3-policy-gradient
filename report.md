@@ -23,3 +23,15 @@ Baseline is not a function of current action, so it is not a function of θ.
 After differentiated by θ, it disappears.
 
 Therefore, it does not affect gradient.
+
+## Problem 5
+
+Actor-critic should have better performance compare to previous problems.
+
+Indeed, it surpassed 150 quickly.
+
+However, many classmates including me couldn't have the algorithm hit 200.
+
+It just kept hanging around 180 even for 300 iterations.
+
+There must be something wrong but I couldn't figure it out.
