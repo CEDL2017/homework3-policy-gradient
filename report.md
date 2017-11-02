@@ -13,7 +13,7 @@ source deactivate cedl
 ```
 
 ## CartPole
-Unlike previous MDP problrms we have seen which has clear definition of all state transition probability, the CartPole control problem is more like a real world problem, which means that we don't want to put effort on defining all these environment information since it's too complicate. We simple base on a **model-free reinforcement learning** idea to solve this problem.
+Unlike previous MDP problrms we have seen, whose definition of all state transition probability are pretty clear, the CartPole control problem is more like a real world problem, which means that we don't want to put effort on defining all these environment information since it's too complicate. We simply base on a **model-free reinforcement learning** idea to solve this problem.
  
 Simple description of CartPole: </br>
 <img src="https://cloud.githubusercontent.com/assets/7057863/19025154/dd94466c-8946-11e6-977f-2db4ce478cf3.gif" width="400" height="200" />
@@ -23,113 +23,116 @@ Simple description of CartPole: </br>
 **Reward** : Always 1 in every time step</br>
 **End** : When the the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.
 
-The following will describe a standard way of policy gradient approach, the Actor-Critic algorithm and the GAE approach.  
-### 1. "Vanilla"(standard) policy gradient method
+The following will describe a standard way of policy gradient approach, and 2 improvements of policy gradient, which are Actor-Critic algorithm and the GAE approach respectively.
 
-The concept in value iteration is base on **Bellman Optimization Equation**: </br></br>
-![BOE](https://latex.codecogs.com/gif.latex?v%5E*%28s%29%20%3D%20%5Cmax_%7Ba%5Cin%20A%7D%20%28R%5Ea_s%20&plus;%20%5Cgamma%20%5Csum_%7Bs%27%5Cin%20S%20%7DP%5Ea_%7Bss%27%7D%20v%5E*%28s%27%29%29)
+### 1. "Vanilla"(standard) policy gradient approach
+
+Recall that in the previous classical MDP problems, we can solve by value iteration or policy iteration, when we go further to address model-free problem, we still need the **action-state value function** ( **q(s,a)** ) to help us solve the problem no matter using sarsa(lambda) or Q-learning (We store q(s,a) like a table or 2-dim matrix). </br></br>
+However, our problem in this stage is quite complicate, and it wouldn't make any sense if we still use the action-state value function in a table look-up way, **we want to parameterized it!** That is the idea of policy gradient came from. In other words, we want to find a direct mapping function (suppose θ as our parameter) from our state-action to the reward, and hopefully it is differentiable so we can update the θ in an efficient way which can then be used to help us to find the best policy. </br></br>
+ 
+#### 1-1. Basic Idea
+The formula of policy gradient is described clear in the [code](./Lab3-policy-gradient.ipynb) by TA, I will simply point out the conclusion. The policy gradient formula is like this:
 </br></br>
-which in this case, since rewards also relate to s', we can rewrite it as:</br></br>
-![BOE_v2](https://latex.codecogs.com/gif.latex?v%5E*%28s%29%3D%5Cmax_%7Ba%5Cin%20A%7D%20%28%5Csum_%7Bs%27%5Cin%20S%20%7D%20P%5Ea_%7Bss%27%7D*%28R%5Ea_%7Bss%27%7D%20&plus;%20%5Cgamma%20v%5E*%28s%27%29%29%29)
-![BOE_v3](https://latex.codecogs.com/gif.latex?%3D%20%5Cmax_%7Ba%5Cin%20A%7D%28%5Csum_%7Bs%27%5Cin%20S%20%7DP%28s%2C%20a%2C%20s%27%29*%5BR%28s%2C%20a%2C%20s%27%29%20&plus;%20%5Cgamma%20v%5E*%28s%27%29%5D%29)
+![pg](https://latex.codecogs.com/gif.latex?%5Chat%7Bg%7D%20%3D%20%5Cnabla_%5Ctheta%20L%28%5Ctheta%29)</br></br>
+which : &nbsp;&nbsp;&nbsp;&nbsp;
+![surrogate-loss](https://latex.codecogs.com/gif.latex?L%28%5Ctheta%29%20%3D%20%5Cfrac%7B1%7D%7B%28NT%29%7D%20%28%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Csum_%7Bt%3D0%7D%5E%7BT%7Dlog%5Cpi_%5Ctheta%28a%5Ei_t%7Cs%5Ei_t%29*R%5Ei_t%29%29)&nbsp;&nbsp;&nbsp;&nbsp; is called the surrogate loss, and it is actually the result of taking the expectation of log(pi)*q(s,a).
+</br></br>
+The way we parameterize the policy is using a 2-layer shallow neural network, and later base on the formula to calculate the surrogate loss(We use the reduce_mean function to implement it). Code detail please refer to [policy.py](./policy_gradient/policy.py). </br></br>
 
-the idea is that for each iteration, we will find max value returned from all possible actions on current state, and replace the old value function of current state, s, with the new value functin. However in the implementation, we don't actually replace it directly, since we need to calculate the amount of difference of value function between current iteration and previous iteration. The result is as follows:
-<p align="center"><img src = "./imgs/max-diff-value-function.png"></p>
+#### 1-2. Adding the idea of baseline
+The idea of substracting the baseline from the policy gradient is that we care about the **relative different** instead of the actual q-value(Big capital R in this case) we get. For example if we got R = 10001 this time while got R = 9999 in the next time, then base on the policy gradient formula, we will update our theta in proportion to ∇(10001) this time and update our theta in proportion to ∇(9999) next time. However, it is obvious that in this way, the updated direction varies a lot! What we really want is update our theta in proportion to ∇(1) this time and update our theta in proportion to ∇(-1) next time for example. That is the idea of baseline come from, in other words, we **rescale our reward** in order to decrease the variance of our estimation. </br></br>
+One good choice of baseline function is actually the state-value function, **V**. The reason is that we can interpret the state-value function as the **average or usual reward** we got, and by substracting the state-value function from the policy gradient, we can have a conept of **how much more reward we can get with respect to the usual reward** base on the certain sampled policy.</br></br>
+The result are as follows:</br>
+<div align="center">
+<img src = "./output_figure/prob3_loss.png" height="200px">
+<img src = "./output_figure/prob3_avereturn.png" height="200px">
+</div>
 
-For finding the best policy, we actually only need to take _argmax_ once after the whole iterations are done, since at that time, our value function has already converged to the certain stage. However, in this assignment, since we are going to see the number of changed actions in each iteration, we will extract current policy every iteration. As the result shown below, we can see there are few actions changes when iteration goes higher.
-<p align="center"><img src = "./imgs/NchgAction.png"></p>
+To know more details please refer to the [code](./Lab3-policy-gradient.ipynb)</br></br>
 
-The final optimal policy output can be seen in the [Lab2-MDPs.ipynb](./Lab2-MDPs.ipynb)
+#### 1-3. Why baseline won't introduce bias
+
+The idea is that we want to **reduce the variance** but we **don't want to change the expectation result**.(Described in the **Basic Idea Part** above, which the surrogate loss is actually the result of taking the expectation of log(pi)*q(s,a)). If the baseline function can remain the expectation in the same value, then we can comfirm that by substracting the baseline from the policy gradient, we can not only reduce variance but also make sure the bias didn't increase. In other words, we want to see the following equation: </br></br>
+![baseline](https://latex.codecogs.com/gif.latex?%5Cnabla_%5Ctheta%20L%28%5Ctheta%29%20%3D%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20R%5D%20%3D%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20%28R%20-%20B%28s%29%29%5D)
+
+which B(s) is the baseline function. The proof is as follows:</br></br>
+![eq1](https://latex.codecogs.com/gif.latex?E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20%28R%20-%20B%28s%29%29%5D)</br>
+![eq2](https://latex.codecogs.com/gif.latex?%3D%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20R%5D%20-%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20B%28s%29%5D)</br></br>
+now we focus on the latter part in the above equation,</br>
+
+![eq3](https://latex.codecogs.com/gif.latex?E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20B%28s%29%5D)</br></br>
+![eq4](https://latex.codecogs.com/gif.latex?%3D%5Csum_%7Bs%5Cin%20S%7D%20%5Csum_%7Ba%5Cin%20A%7D%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29*B%28s%29%20*%20%5Cpi_%5Ctheta%28s%2C%20a%29)</br>
+![eq5](https://latex.codecogs.com/gif.latex?%3D%5Csum_%7Bs%5Cin%20S%7DB%28s%29%20%5Csum_%7Ba%5Cin%20A%7D%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29)</br>
+![eq6](https://latex.codecogs.com/gif.latex?%3D%5Csum_%7Bs%5Cin%20S%7DB%28s%29%20%5Csum_%7Ba%5Cin%20A%7D%5Cnabla_%5Ctheta%20%5Cpi_%5Ctheta%28s%2C%20a%29)</br>
+![eq7](https://latex.codecogs.com/gif.latex?%3D%5Csum_%7Bs%5Cin%20S%7DB%28s%29%20%5Cnabla_%5Ctheta%5Csum_%7Ba%5Cin%20A%7D%20%5Cpi_%5Ctheta%28s%2C%20a%29)</br>
+![eq8](https://latex.codecogs.com/gif.latex?%3D%5Csum_%7Bs%5Cin%20S%7DB%28s%29%20%5Cnabla_%5Ctheta%20*%201)</br>
+![eq9](https://latex.codecogs.com/gif.latex?%3D%5Csum_%7Bs%5Cin%20S%7DB%28s%29%20*%200)</br>
+![eq10](https://latex.codecogs.com/gif.latex?%3D%200)</br>
+
+Finally, we proove that :</br></br>
+![eq1](https://latex.codecogs.com/gif.latex?E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20%28R%20-%20B%28s%29%29%5D)</br>
+![eq2](https://latex.codecogs.com/gif.latex?%3D%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20R%5D%20-%20E_%7B%5Cpi_%5Ctheta%7D%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20B%28s%29%5D)</br>
+![eq3](https://latex.codecogs.com/gif.latex?%3DE_%7B%5Cpi_%5Ctheta%7D%20%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20R%5D%20-%200)</br>
+![eq4](https://latex.codecogs.com/gif.latex?%3DE_%7B%5Cpi_%5Ctheta%7D%20%5B%5Cnabla_%5Ctheta%20log%5Cpi_%5Ctheta%28s%2C%20a%29%20*%20R%5D)</br>
+
+Now we can see that by substracting **a zero-expection baseline function** from the policy gradient, we can **not only reduce variance but also remain the same bias**.
 </br>
 
-### Policy iteration
-The concept in policy iteration is base on **Bellman Expectation Equation** and **greedy selection of v_pi**, the Bellman Expectation Equation of v_pi  is as follows: </br></br>
-![BEE](https://latex.codecogs.com/gif.latex?v_%5Cpi%28s%29%3D%5Csum_%7Ba%5Cin%20A%7D%20%5Cpi%28a%20%7C%20s%29%20*%20%28%5Csum_%7Bs%27%5Cin%20S%20%7D%20P%5Ea_%7Bss%27%7D*%28R%5Ea_%7Bss%27%7D%20&plus;%20%5Cgamma%20v_%5Cpi%28s%27%29%29%29)
+[note]: the above proof are mainly come from the slides of Davis Silver RL-course in lecture 7. [link](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/pg.pdf)</br></br>
 
-However in this environment, our policy is deterministic policy, which means that we can simply rewrite the function as : </br></br>
-![BEE_simplify](https://latex.codecogs.com/gif.latex?v_%5Cpi%28s%29%3D%5Csum_%7Bs%27%5Cin%20S%20%7D%20P%5Ea_%7Bss%27%7D*%28R%5Ea_%7Bss%27%7D%20&plus;%20%5Cgamma%20v_%5Cpi%28s%27%29%29)
-![BEE_simplify_ext](https://latex.codecogs.com/gif.latex?%3D%5Csum_%7Bs%27%5Cin%20S%20%7DP%28s%2C%20%5Cpi%28s%29%2C%20s%27%29*%5BR%28s%2C%20%5Cpi%28s%29%2C%20s%27%29%20&plus;%20%5Cgamma%20v_%5Cpi%28s%27%29%5D)
+#### 1-4. Compare the result before and after adding the idea of baseline
 
-The key idea of policy iteration is that it will **first evaluate the given policy** and then **improve the policy**. In the evaluating stage, we solve the value function in a _batch-learning_ way, instead of _online-learning_ way, which means that we didn't apply multiple iterations in order to solve the best value function base on certain policy, instead, we just come out a close form solution for our best value function. </br>
-After solving the state value function we can then move on to solve the action-state value function to help us find the best policy. For every iteration, we update policy once, and in the next iteration, we will evaluate our policy again, and so on and so forth. </br>
-As the same result in value iteration, we can see the number of changed actions goes to zero when iterations go higher. (The equation of _action-state value function_ and the equation of _policy_ are all described clear in the [Lab2-MDPs.ipynb](./Lab2-MDPs.ipynb), I will simply skip here)
-<p align="center"><img src = "./imgs/N-of-change-of-state-value-function.png"></p>
+The result before adding the idea of baseline: </br>
 
-The final optimal policy output can also be seen in the [Lab2-MDPs.ipynb](./Lab2-MDPs.ipynb)
-
-### Why Policy-iteration converge faster than value-iteration
 <div align="center">
-<img src = "./imgs/policy-converge-on-each-state.png" height="200px">
-<img src = "./imgs/value-converge-on-each-state.png" height="200px">
+<img src = "./output_figure/prob4_loss.png" height="200px">
+<img src = "./output_figure/prob4_avereturn.png" height="200px">
 </div>
 
-On the left hand side is the state-value-function result of **Policy Iteration** and **Value Iteration** on the right hand side. We can see in less number of iterations, the policy iteration achieves stable level. </br></br>
 
-* reason:
+The result after adding the idea of baseline: </br>
 
-The main reason is that in one iteration, the Value-Iteration approach will only update value function once(on selecting the maximum result from all possible actions), while the Policy-Iteration approach will update the value function multiple times on given a certain policy, which is the **evaluating policy** stage we described in the _Policy Iteration_ above. (we solve in a close form solution way, so it's not obvious to see directly from the code). Therefore, we could expect that, in one iteration, the Policy-Iteration approach will update value function to a better stage compare with the result from Value-Iteration approach only because it updates much more times. </br>
+<div align="center">
+<img src = "./output_figure/prob3_loss.png" height="200px">
+<img src = "./output_figure/prob3_avereturn.png" height="200px">
+</div>
 
-* pros and cons:
+We can see from the above figure that the oscillation of loss in "before adding the idea of baseline" is quite strong than the result "after adding the idea of baseline". This means that the variance of the result without baseline is large than the result with baseline. </br></br>
+The reason is that after we substracting the baseline from the policy gradient, we somehow **rescale the reward**. Just like the example I mentioned above in the **"1-2. Adding the idea of baseline"** part, if we didn't apply baseline, each time the direction we update would possibly be a pretty large amount (e.g. proportion to ∇(10001)), and that is where the variance comes from.
 
-Although Policy-Iteration converges faster, as we described above, it will be pretty expensive on **evaluating the policy**, but if it could evaluate the policy really fast like in this MDP problem, then Policy-Iteration is definitely a better choice for solving the problem.
 </br>
 
-## Crawler robot
+### 2. Actor-Critic algorithm
 
-In this problem, we define our crawler as follows: </br>
+Actually the actor-critic algorithm 
 
-- _States(S)_:
+To know more details please also refer to the [code](./Lab3-policy-gradient.ipynb)
 
-```
-state = (ArmBucket_index, HandBucket_index)
-ArmBucket_index = 0 ~ 8
-HandBucket_index = 0 ~ 12
-which ArmBucket = [-0.5235987755982988, -0.39269908169872414, -0.2617993877991494, -0.13089969389957468, 0.0, 0.13089969389957468, 0.26179938779914946, 0.39269908169872414, 0.5235987755982988]
-HandBucket = [-2.6179938779914944, -2.399827721492203, -2.181661564992912, -1.9634954084936207, -1.7453292519943298, -1.5271630954950384, -1.3089969389957472, -1.090830782496456, -0.8726646259971649, -0.6544984694978737, -0.43633231299858233, -0.21816615649929139, 0.0]
-```
+### 3. Generalized Advantage Estimation
 
-- _Actions(A)_:
+The GAE is defined as the weighted average of the advantage estimation, which the formula is as follows: </br>
 
-```
-0: ArmBucket_index-1 (decrease the angle of Arm)
-1: ArmBucket_index+1 (increase the angle of Arm)
-2: HandBucket_index-1 (decrease the angle of Hand)
-3: HandBucket_index+1 (increase the angle of Hand)
-```
+![GAE](https://latex.codecogs.com/gif.latex?A_t%5E%7BGAE%7D%20%3D%20%5Csum_%7Bl%3D0%7D%5E%7B%5Cinfty%7D%20%28%5Cgamma%5Clambda%29%5El%5Cdelta_%7Bt&plus;1%7D)
+</br></br>
+the delta function here is the discounted sum of TD(Temporal Difference) residuals, which is written as : </br>
 
-- _Gamma(γ)_: 0.9 </br>
-- _Rewards(R)_: the x-distance of moving </br>
-- _alpha(learning rate, α)_: 0.1 </br>
-- _epsilon(greedy exploration probability, ϵ)_: 0.5 </br>
+![delta](https://latex.codecogs.com/gif.latex?%5Cdelta%5Ei_t%20%3D%20r%5Ei_t%20&plus;%20%5Cgamma%20*%20V%5Ei_%7Bt&plus;1%7D%20-%20V%5Ei_t)
 
+I feel like the idea of GAE is actually trying to keep the advantage of bootstrapping (**low variance**) but also want to achieve **unbias** by accumulating the true reward we got from further time-step after the current state. The value of lambda is the same as the idea in [TD(λ)](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/MC-TD.pdf), which the larger the λ is, the more we trust on further time-step reward we get. One thing need to notice is that TD(0) could be seen as pure bootstrap algorithm and its formula is pretty similar to our δ here(without substracting the baseline).
 
-### Sampling-based Tabular Q-Learning
-In this approach, we mainly follow these two equations: </br></br>
-![q-learn](https://latex.codecogs.com/gif.latex?target%28s%27%29%20%3D%20R%28s%2C%20a%2C%20s%27%29%20&plus;%20%5Cgamma%20%5Cmax_%7Ba%27%7D%20Q_%7B%5Ctheta_k%7D%28s%27%2C%20a%27%29)
-![q-learn_2](https://latex.codecogs.com/gif.latex?Q_%7Bk&plus;1%7D%28s%2C%20a%29%20%5Cleftharpoonup%20%281-%5Calpha%29*Q_k%28s%2C%20a%29%20&plus;%20%5Calpha%5Btarget%28s%27%29%5D)</br></br>
-where the _a_ would have ϵ probability to be random selected.</br></br>
-For each iteration, we will first sample an action(0.5 for random, 0.5 for extracting maximum q-value index for certain state), and then apply update on our q-value base on the above two equations. We can see the state changes as below :</br>
+The result are as follows:</br>
 <div align="center">
-<img src = "./imgs/0-itr-of-state-changes.png" height="200px">
-<img src = "./imgs/50000-itr-of-state-changes.png" height="200px">
-</div>
-<div align="center">
-<img src = "./imgs/100000-itr-of-state-changes.png" height="200px">
-<img src = "./imgs/150000-itr-of-state-changes.png" height="200px">
-</div>
-<div align="center">
-<img src = "./imgs/200000-itr-of-state-changes.png" height="200px">
-<img src = "./imgs/250000-itr-of-state-changes.png" height="200px">
+<img src = "./output_figure/prob6_loss.png" height="200px">
+<img src = "./output_figure/prob6_avereturn.png" height="200px">
 </div>
 
-which the x-axis represents the armbucket-index, y-axis represents the handbucket-index, and the z-axis represents the sequence of the states. If we draw them all in the same figure, we could see:</br>
-<p align='center'><img src = "./imgs/combinations.png"></p>
+To know more details please also refer to the [code](./Lab3-policy-gradient.ipynb)
 
-which the iteration from low to high corresponds to the colors of _red_, _orange_, _yellow_, _green_, _blue_ and _purple_ respectively. We can see when color start from **green**, **blue** and **purple**, those dots are barely to distinguish from each other, which means that their states are almost the same, and that is the point when our crawler reach the speed over 3.</br></br>
-The final successfully running crawler would be look like this:
-<img src="./imgs/tmp_vedio.gif">
 
 ## Reference
 * A pretty nice [explanation of GAE](http://www.breloff.com/DeepRL-OnlineGAE/) written by [Thomas Breloff](https://github.com/tbreloff).
 * [Another implementation](https://chenrudan.github.io/blog/2016/09/04/cartpole.html) of Cartpole control problem.
-* Lecture 7th of RL from Davis Silver. [link](https://www.youtube.com/watch?v=KHZVXao4qXs&t=4851s)
+* Also [another implementation](https://gist.github.com/mohakbhardwaj/3bdc75f76e51037f479160ad9d019b7a) of CartPole control problem.
+* Also [another implementation](https://gist.github.com/domluna/529d3e7b51fe7e2589be71dd9d2ace4e) of CartPole control problem.
+* Lecture 4,5,6,7th of RL from Davis Silver. [link](https://www.youtube.com/watch?v=KHZVXao4qXs&t=4851s)
+* [Important Sampling](https://en.wikipedia.org/wiki/Importance_sampling)

@@ -1,5 +1,6 @@
 from gym.spaces import Box, Discrete
 import numpy as np
+import os
 from scipy.signal import lfilter
 import math, scipy
 import matplotlib.pyplot as plt
@@ -48,7 +49,10 @@ def plot_curve(data, key, filename=None):
     plt.xlabel("iterations")
     plt.ylabel(key)
     if filename is not None:
-        plt.savefig(filename)
+        output_dir = './output_figure/'
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        plt.savefig(output_dir+filename+'.png')
     plt.show()
     plt.close()
 
