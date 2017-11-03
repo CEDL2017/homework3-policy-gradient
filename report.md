@@ -30,7 +30,7 @@ In this homework, there are mainly six problems that we want to solve using poli
 Construct a 2-layer neural network as stochastic policy using tensorflow.
 
 #### code
-======
+---
 ```
 # 1st hidden layer: define weight and bias 
 w_layer1 = tf.Variable(tf.truncated_normal([in_dim, hidden_dim], stddev=1.0/math.sqrt(float(in_dim))))
@@ -50,18 +50,18 @@ probs = tf.nn.softmax(tf.matmul(layer1,w_softmax)+b_softmax)
 
 ### Problem 2. Compute the surrogate loss
 #### algorithm
-======
-* <b>accumulated discounted rewards</b> (from timestep 't' to the end of that episode)
+---
+* <b>accumulated discounted rewards</b> (from timestep 't' to the end of that episode) <br/>
 ![accumulated discounted rewards](./accumulated discounted rewards.png)
 
-* <b>the empirical policy gradient</b>
+* <b>the empirical policy gradient</b>  <br/>
 ![the empirical policy gradient](./the empirical policy gradient.png)
 
-* <b>the surrogate loss</b>
+* <b>the surrogate loss</b>  <br/>
 ![the surrogate loss](./the surrogate loss.png)
 
 #### code
-======
+---
 ```
 # self._advantages : accumulated discounted rewards from each timestep to the end of an episode
 # log_prob : log(pi(a|s)) for all timestep
@@ -73,12 +73,12 @@ surr_loss = tf.reduce_mean(tf.mul(log_prob,self._advantages))*(-1)
 
 ### Problem 3. Use baseline to reduce the variance of our gradient estimate
 #### algorithm
-======
+---
 Change the surrogate loss into:
 ![the surrogate loss_use baseline](the surrogate loss_use baseline.png)
 
 #### code
-======
+---
 ```
 # b : the reward predicted by our baseline
 
@@ -86,7 +86,7 @@ a = r - b
 ```
 
 #### results
-======
+---
 <div align="center">
 <img src = "Q3_average return.png" height="200px">
 <img src = "Q3_average return.png" height="200px">
@@ -95,7 +95,7 @@ a = r - b
 
 ### Problem 4. Modify the code to compare the variance and performance before and after adding baseline
 #### results
-======
+---
 <b> With baseline </b>
 * the average return: smoothly increase
 
@@ -115,12 +115,12 @@ a = r - b
 
 ### Problem 5. To implement the Actor-Critic algorithm (with bootstrapping)
 #### algorithm
-======
+---
 Using the one-step bootstrap for the advantage function
 ![Actor-Critic](Actor-Critic.png)
 
 #### code
-======
+---
 ```
 def discount_bootstrap(x, discount_rate, b):
 	roll_b = np.roll(b,len(x)-1)
@@ -132,18 +132,18 @@ def discount_bootstrap(x, discount_rate, b):
 
 ### Problem 6. To implement the Generalized Advantage Estimation
 #### algorithm
-======
+---
 The generalized advantage estimation will be:
 ![Generalized Advantage Estimation](Generalized Advantage Estimation.png)
 
 #### code
-======
+---
 ```
 a = util.discount(a, self.discount_rate * LAMBDA)
 ```
 
 #### results
-======
+---
 * the average return: irregular increase
 <div align="center">
 <img src = "Q6_loss.png" height="200px">
