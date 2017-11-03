@@ -52,13 +52,13 @@ probs = tf.nn.softmax(tf.matmul(layer1,w_softmax)+b_softmax)
 #### algorithm
 ---
 * <b>accumulated discounted rewards</b> (from timestep 't' to the end of that episode) <br/>
-![accumulated discounted rewards](./accumulated discounted rewards.png)
+![accumulated discounted rewards](accumulated_discounted_rewards.png)
 
 * <b>the empirical policy gradient</b>  <br/>
-![the empirical policy gradient](./the empirical policy gradient.png)
+![the empirical policy gradient](the_mpirical_policy_gradient.png)
 
 * <b>the surrogate loss</b>  <br/>
-![the surrogate loss](./the surrogate loss.png)
+![the surrogate loss](the_surrogate_loss.png)
 
 #### code
 ---
@@ -75,7 +75,7 @@ surr_loss = tf.reduce_mean(tf.mul(log_prob,self._advantages))*(-1)
 #### algorithm
 ---
 Change the surrogate loss into:
-![the surrogate loss_use baseline](the surrogate loss_use baseline.png)
+![the surrogate loss_use baseline](the_surrogate_loss_use_baseline.png)
 
 #### code
 ---
@@ -134,7 +134,7 @@ def discount_bootstrap(x, discount_rate, b):
 #### algorithm
 ---
 The generalized advantage estimation will be:
-![Generalized Advantage Estimation](Generalized Advantage Estimation.png)
+![Generalized Advantage Estimation](Generalized_Advantage_Estimation.png)
 
 #### code
 ---
