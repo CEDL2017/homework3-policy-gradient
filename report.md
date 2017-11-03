@@ -26,7 +26,6 @@ In this homework, there are mainly six problems that we want to solve using poli
 	
 ## Detail
 ### Problem 1. Construct a neural network to represent policy
-<b> homework3-policy-gradient/policy_gradient/policy.py </b> <br/>
 Construct a 2-layer neural network as stochastic policy using tensorflow.
 
 #### code
@@ -55,7 +54,7 @@ probs = tf.nn.softmax(tf.matmul(layer1,w_softmax)+b_softmax)
 ![accumulated discounted rewards](accumulated_discounted_rewards.png)
 
 * <b>the empirical policy gradient</b>  <br/>
-![the empirical policy gradient](the_mpirical_policy_gradient.png)
+![the empirical policy gradient](the_empirical_policy_gradient.png)
 
 * <b>the surrogate loss</b>  <br/>
 ![the surrogate loss](the_surrogate_loss.png)
@@ -74,7 +73,7 @@ surr_loss = tf.reduce_mean(tf.mul(log_prob,self._advantages))*(-1)
 ### Problem 3. Use baseline to reduce the variance of our gradient estimate
 #### algorithm
 ---
-Change the surrogate loss into:
+Change the surrogate loss into: <br/>
 ![the surrogate loss_use baseline](the_surrogate_loss_use_baseline.png)
 
 #### code
@@ -116,7 +115,7 @@ a = r - b
 ### Problem 5. To implement the Actor-Critic algorithm (with bootstrapping)
 #### algorithm
 ---
-Using the one-step bootstrap for the advantage function
+Using the one-step bootstrap for the advantage function <br/>
 ![Actor-Critic](Actor-Critic.png)
 
 #### code
@@ -133,7 +132,7 @@ def discount_bootstrap(x, discount_rate, b):
 ### Problem 6. To implement the Generalized Advantage Estimation
 #### algorithm
 ---
-The generalized advantage estimation will be:
+The generalized advantage estimation will be: <br/>
 ![Generalized Advantage Estimation](Generalized_Advantage_Estimation.png)
 
 #### code
