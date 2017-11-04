@@ -45,23 +45,23 @@ The initial weight is different every time, so sometimes iteration can be within
 
 resuts:
   <div align="center">
-	<img src="./imgs/P3-loss.png" height="100px">
-	<img src="./imgs/P3-return.png" height="100px">
+	<img src="./imgs/P3-loss.png" height="200px">
+	<img src="./imgs/P3-return.png" height="200px">
   </div>
 
 ### Problem 4: Compare baseline with non-baseline
 
 add baseline:
 <div align="center">
-	<img src = "./imgs/P3-loss.png" height="100px">
-	<img src = "./imgs/P3-return.png" height="100px">
+	<img src = "./imgs/P3-loss.png" height="200px">
+	<img src = "./imgs/P3-return.png" height="200px">
 </div>
 
 
 Non-baseline:
 <div align="center">
-	<img src = "./imgs/P4-loss.png" height="100px">
-	<img src = "./imgs/P4-return.png" height="100px">
+	<img src = "./imgs/P4-loss.png" height="200px">
+	<img src = "./imgs/P4-return.png" height="200px">
 </div>
 
 The variance would be higher in the process of gradient estimate that affects the ability of learning. We make discount_rate to be smaller in the iteration that can reduce the variance, but bias will be increase.
@@ -107,8 +107,8 @@ The result looks so bad, the iteration numbers must exceed 200. The performance 
 Here, we use a novel advantage function called "Generalized Advantage Estimation", which introduces one hyperparameter  λ to compromise the above two estimation methods.
 
 <div align="center">
-	<img src = "./imgs/for5.png" height="200px">
-	<img src = "./imgs/for6.png" height="200px">
+	<img src = "./imgs/for5.png" height="100px">
+	<img src = "./imgs/for6.png" height="100px">
 </div>
 
 This generalized estimator of the advantage function allows a trade-off of bias and variance using the parameter 0?λ?1.
