@@ -31,7 +31,21 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
-
+        def weight(shape):
+            return tf.Variable(tf.truncated_normal(shape, stddev=0.1), name='W', dtype=tf.float32)                    
+        def bias(shape):
+            return tf.Variable(tf.constant(0.1, shape=shape), name='b',dtype=tf.float32)
+            
+        with tf.name_scope('hidden1'):
+            W1 = weight([in_dim, hidden_dim])
+            b1 = bias([hidden_dim])
+            hidden1 = tf.matmul(self._observations, W1)+b1
+            hidden1 = tf.nn.tanh(hidden1)
+        with tf.name_scope('hidden2'):
+            W2 = weight([hidden_dim,out_dim])
+            b2 = bias([out_dim])
+            hidden2 = tf.matmul(hidden1, W2)+b2
+            probs = tf.nn.softmax(hidden2)
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
         # Shape of probs: [1, n_actions]
@@ -72,6 +86,8 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = tf.reduce_mean(self._advantages* log_prob)
+        surr_loss = -1*surr_loss
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
