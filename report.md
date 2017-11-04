@@ -1,4 +1,4 @@
-﻿# Homework3 Report: Policy Gradient
+# Homework3 Report: Policy Gradient
 
 ### 106065507 徐慧文
 ## Overview
@@ -15,7 +15,7 @@ Policy gradient depends on optimizing parametrized policies with the long-term c
 
 ### Problem 1: construct a neural network to represent policy
 We can use a neural network to output prediction of action. 
-```
+```python
 #fc1
 layer1 = tf.contrib.layers.fully_connected( inputs =self._observations, 
                                             num_outputs = hidden_dim,
@@ -31,14 +31,14 @@ probs = tf.nn.softmax(layer2, name='probs' )
 ```
 ### Problem 2: compute the surrogate loss
 Tensorflow just has a function to minimize loss, so we should add minus to loss to achieve our goal of maximizing loss. 
-```
+```python
 surr_loss = -tf.reduce_mean(log_prob*self._advantages )
 ```
 ### Problem 3: Sampling-based Tabular Q-Learning
 Using baseline to reduce the variance of our gradient estimate.
 The advantage estimate A?t = Rt ? b(st).\
 In order to reduce the variance of the gradient estimator, a constant baseline can be subtracted from the gradient.
-```
+```python
 a = r -b
 ```
 The initial weight is different every time, so sometimes iteration can be within the range of 80 and sometimes it would exceed 80. 
@@ -73,9 +73,9 @@ The proof as follows:
 
 the expectation is be unchanged, in spite of the subtraction of baseline : (V represents the baseline)
 <div align="center">
-	<img src = "./imgs/for1.png" height="100px">
-	<img src = "./imgs/for2.png" height="100px">
-    <img src = "./imgs/for3.png" height="100px">
+	<img src = "./imgs/for1.PNG" height="50px">
+	<img src = "./imgs/for2.PNG" height="50px">
+    	<img src = "./imgs/for3.PNG" height="100px">
 </div>
 
 ### Problem 5: Actor-Critic algorithm (with bootstrapping)
@@ -83,10 +83,10 @@ Actor is based on policy-iteration methods such as Policy Gradient, and  Critic 
 
 Using another method to reduce the variance:
 <p>
-	<img src = "./imgs/for4.png" height="100px">
+	<img src = "./imgs/for4.PNG" height="50px">
 </p>
 
-```
+```python
 def discount_bootstrap(x, discount_rate, b):
 	b_ = np.append(b[1:], 0)
     y = np.add(x,discount_rate*b_)
@@ -107,13 +107,13 @@ The result looks so bad, the iteration numbers must exceed 200. The performance 
 Here, we use a novel advantage function called "Generalized Advantage Estimation", which introduces one hyperparameter  λ to compromise the above two estimation methods.
 
 <div align="center">
-	<img src = "./imgs/for5.png" height="100px">
-	<img src = "./imgs/for6.png" height="100px">
+	<img src = "./imgs/for5.PNG" height="80px">
+	<img src = "./imgs/for6.PNG" height="30px">
 </div>
 
 This generalized estimator of the advantage function allows a trade-off of bias and variance using the parameter 0?λ?1.
 
-```
+```python
 a = util.discount(a,self.discount_rate*LAMBDA)
 ```
 result:
