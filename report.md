@@ -1,6 +1,6 @@
-# Homework3 Report: Policy Gradient
+Ôªø# Homework3 Report: Policy Gradient
 
-### 106065507 Æ}ºz§Â
+### 106065507 ÂæêÊÖßÊñá
 ## Overview
 In this homework, we will use a neural network to learn a parameterize policy that can select action without consulting a value function. A value function may still be used to learn the policy weights, but is not required for action selection.
 ## Environment
@@ -98,20 +98,20 @@ a = r -b
 
 result:
 <div align="center">
-	<img src = "./imgs/P5-loss.png" height="100px">
-	<img src = "./imgs/P5-return.png" height="100px">
+	<img src = "./imgs/P5-loss.png" height="200px">
+	<img src = "./imgs/P5-return.png" height="200px">
 </div>
 
 The result looks so bad, the iteration numbers must exceed 200. The performance of average return is unstable that the increase of value is up and down.
 ### Problem 6: Generalized Advantage Estimation
-Here, we use a novel advantage function called "Generalized Advantage Estimation", which introduces one hyperparameter  £f to compromise the above two estimation methods.
+Here, we use a novel advantage function called "Generalized Advantage Estimation", which introduces one hyperparameter  Œª to compromise the above two estimation methods.
 
 <div align="center">
-	<img src = "./imgs/for5.png" height="100px">
-	<img src = "./imgs/for6.png" height="100px">
+	<img src = "./imgs/for5.png" height="200px">
+	<img src = "./imgs/for6.png" height="200px">
 </div>
 
-This generalized estimator of the advantage function allows a trade-off of bias and variance using the parameter 0?£f?1.
+This generalized estimator of the advantage function allows a trade-off of bias and variance using the parameter 0?Œª?1.
 
 ```
 a = util.discount(a,self.discount_rate*LAMBDA)
@@ -121,8 +121,8 @@ result:
 
 <div align="center">
 	LAMBDA = 0.98
-	<img src = "./imgs/P6-98-loss.png" height="100px">
-	<img src = "./imgs/P6-98-return.png" height="100px">  
+	<img src = "./imgs/P6-98-loss.png" height="200px">
+	<img src = "./imgs/P6-98-return.png" height="200px">  
 </div>
 
 if Lambda is too small, the estimate is just affected by near states;if it is too big, it will no make sense. 
