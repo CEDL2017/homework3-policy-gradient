@@ -20,7 +20,8 @@ class CategoricalPolicy(object):
 
         1. Use TensorFlow to construct a 2-layer neural network as stochastic policy.
             The hidden layer should be fully-connected and have size `hidden_dim`.
-            Use tanh as the activation function of the first hidden layer, and append softmax layer after the output
+            Use tanh as the activation function of the first hidden layer,
+             and append softmax layer after the output
             of the neural network to get the probability of each possible action.
 
         2. Assign the output of the softmax layer to the variable `probs`.
@@ -31,6 +32,8 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
+        hidden = tf.contrib.layers.fully_connected(self._observations, hidden_dim, activation_fn=tf.nn.tanh)
+        probs = tf.contrib.layers.fully_connected(hidden, out_dim, activation_fn=tf.nn.softmax)
 
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
@@ -73,6 +76,8 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
+
+        surr_loss = -tf.reduce_mean(tf.multiply(log_prob, self._advantages))
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
