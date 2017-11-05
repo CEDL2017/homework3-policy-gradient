@@ -21,7 +21,7 @@ def discount_cumsum(x, discount_rate):
     discounted_r = np.cumsum(discounted_r[::-1])
     return discounted_r[::-1]
 
-def discount_bootstrap(x, discount_rate, b):
+def discount_bootstrap(x, discount_factor, b):
     """
     Args:
         x: the immediate reward for each timestep. e.g. [1, 1, 0]
@@ -32,6 +32,8 @@ def discount_bootstrap(x, discount_rate, b):
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    v_t = np.append(b[1:], 0)
+    return x + discount_factor * v_t
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
 def plot_curve(data, key, filename=None):
