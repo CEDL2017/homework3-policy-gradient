@@ -54,7 +54,7 @@ unbiased
 
 Why the baseline won't introduce bias?
 
-
+The baseline minimizes the variance of the gradient estimate, but the baseline does not introduce bias.
 
 ##### Problem 5: Actor-Critic algorithm (with bootstrapping)
 use the one-step bootstrap for the advantage function
