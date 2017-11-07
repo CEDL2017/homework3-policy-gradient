@@ -31,6 +31,11 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
+        h1 = tf.contrib.layers.fully_connected(self._observations, num_outputs=hidden_dim, activation_fn=tf.tanh)   
+        h2 = tf.contrib.layers.fully_connected(h1, num_outputs=out_dim, activation_fn=None)
+        probs = tf.nn.softmax(h2)
+        ###
+        
 
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
@@ -72,8 +77,9 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = -tf.reduce_mean(log_prob*self._advantages)
         # <<<<<<<<
-
+    
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
 
