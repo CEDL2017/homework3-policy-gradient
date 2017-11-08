@@ -21,15 +21,15 @@ surr_loss = -tf.reduce_mean(tf.multiply(log_prob, self._advantages))
 Simply get a by minusing r by values predicted by our baseline
 In this part, I find that loss is pretty unstable, it would not conver to a certain number. The result is shown below.
 <table style="border: none !important;">
-<td>![alt problem3 result ](image/3_1.png "problem3 result")</td>
-<td>![alt problem3 result ](image/3_2.png "problem3 result")</td>
+<td><img alt="" src="image/3_1.png"></td>
+<td><img alt="" src="image/3_2.png"></td>
 </table>
 
 ## Problem 4 : training without baseline
 Training still ended up around 80 epoch. So we can say that the performance was not influenced by the baseline. Also, this experience proved that baseline won't introduce bias. The reason is that even thought we minus the r by the values predicted by real baseline, the expectation stay in the same. 
 <table style="border: none !important;">
-<td>![alt problem4 result ](image/4_1.png "problem4 result")</td>
-<td>![alt problem4 result ](image/4_2.png "problem4 result")</td>
+<td><img alt="" src="image/4_1.png"></td>
+<td><img alt="" src="image/4_2.png"></td>
 </table>
 
 ## Problem 5 : Actor-Critic algorithm (with bootstrapping)
@@ -47,8 +47,8 @@ However, I never reach 195 within 200 epoch.
 ## Problem 6 : Generalized Advantage Estimation
 In this part, we introduce a trade-off method to combine the above two method with giving a new variable λ.
 <table style="border: none !important;">
-<td>![alt problem6 result ](image/6_1.png "problem6 result")</td>
-<td>![alt problem6 result ](image/6_2.png "problem6 result")</td>
+<td><img alt="" src="image/6_1.png"></td>
+<td><img alt="" src="image/6_2.png"></td>
 </table>
 
 ### Reference
