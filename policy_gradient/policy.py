@@ -4,6 +4,10 @@ import numpy as np
 # In this Lab, we just use categorical policy, which used for MDPs with discrete action space
 # For continuous action space, you can resort to Gaussian Policy, 
 #      or Beta Policy (http://proceedings.mlr.press/v70/chou17a.html)
+#hello = tf.constant('Hello, TensorFlow!')
+#sess = tf.Session()
+#print(sess.run(hello))
+
 class CategoricalPolicy(object):
     def __init__(self, in_dim, out_dim, hidden_dim, optimizer, session):
 
@@ -30,6 +34,14 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        
+        # fully-connected (Dense Layer)
+        fc1 = tf.layers.dense(inputs=self._observations , units=hidden_dim, activation=tf.nn.tanh)
+        fc2 = tf.layers.dense(inputs=fc1 , units=out_dim, activation=tf.nn.softmax)     #out_dim
+        
+        #output = [[self._observations.get_shape()] [tf.nn.softmax(fc2, name="softmax_tensor")] ]
+        probs = fc2
+        
         # <<<<<<<<
 
         # --------------------------------------------------
@@ -37,6 +49,7 @@ class CategoricalPolicy(object):
         # Shape of probs: [1, n_actions]
 
         act_op = probs[0, :]
+        #print( self._sess.run(act_op) )
 
         # --------------------------------------------------
         # Following operations (variables) are used when updating mode
@@ -72,6 +85,8 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = -tf.reduce_mean(log_prob * self._advantages)   # maximization
+        
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
@@ -100,3 +115,5 @@ class CategoricalPolicy(object):
     def train(self, observations, actions, advantages):
         loss, _ = self._sess.run([self._loss_op, self._train_op], feed_dict={self._observations:observations, self._actions:actions, self._advantages:advantages})
         return loss
+
+#CategoricalPolicy
