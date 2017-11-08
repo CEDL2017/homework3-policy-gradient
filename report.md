@@ -64,15 +64,15 @@ We use <b>baseline</b> to reduce the variance of our gradient estimation.
 	<b>Iteration: 78</b>
 
 	<div align="center">
-		<img src = "images/P3_loss.PNG" height=50%>
-		<img src = "images/P3_return.PNG" height=50%>
+		<img src = "images/P3_loss.PNG" height="200px">
+		<img src = "images/P3_return.PNG" height="200px">
 	</div>
 
 	<b>Iteration: 91</b>
 
 	<div align="center">	
-		<img src = "images/P3_loss_1.PNG" height=50%>		
-		<img src = "images/P3_return_1.PNG" height=50%>		
+		<img src = "images/P3_loss_1.PNG" height="200px">		
+		<img src = "images/P3_return_1.PNG" height="200px">		
 	</div>
 
 
@@ -89,14 +89,14 @@ Most of the time removing baseline has fewer iteration than adding baseline.
 
 	<b>Add baseline</b> (`baseline = LinearFeatureBaseline(env.spec)`)
 	<div align="center">
-		<img src = "images/P3_loss.PNG" height=50%>
-		<img src = "images/P3_return.PNG" height=50%>
+		<img src = "images/P3_loss.PNG" height="200px">
+		<img src = "images/P3_return.PNG" height="200px">
 	</div>
 
 	<b>Remove baseline</b> (`baseline = None`)
 	<div align="center">
-		<img src = "images/P4_loss.PNG" height=50%>
-		<img src = "images/P4_return.PNG" height=50%>
+		<img src = "images/P4_loss.PNG" height="200px">
+		<img src = "images/P4_return.PNG" height="200px">
 	</div>
 
 ---
@@ -136,8 +136,8 @@ We change the advantage function in Problem 3 into the function below, using <b>
 * <b>Result</b>
 
 <p align="center">
-	<img src = "images/P5_loss.PNG"   height=50%>
-	<img src = "images/P5_return.PNG" height=50%>
+	<img src = "images/P5_loss.PNG"   height="200px">
+	<img src = "images/P5_return.PNG" height="200px">
 </p>
 
 ## Problem 6: Generalized Advantage Estimation
@@ -158,6 +158,8 @@ We use the previous advantage function in Problem 5 and introduce one hyperparam
 * <b>Result</b>
 
 <p align="center">
-	<img src = "images/P6_loss.PNG"   height="200px"/>	
+	<img src = "images/P6_loss.PNG"   height="200px"/>
+</p>
+<p>
 	<img src = "images/P6_return.PNG" height="200px"/>	
 </p>
