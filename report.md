@@ -159,7 +159,5 @@ We use the previous advantage function in Problem 5 and introduce one hyperparam
 
 <p align="center">
 	<img src = "images/P6_loss.PNG"   height="200px"/>
-</p>
-<p>
 	<img src = "images/P6_return.PNG" height="200px"/>	
 </p>
