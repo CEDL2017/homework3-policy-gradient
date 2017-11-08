@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import math  # add
 
 # In this Lab, we just use categorical policy, which used for MDPs with discrete action space
 # For continuous action space, you can resort to Gaussian Policy, 
@@ -30,6 +31,21 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        
+        # 1st hidden layer: define weight and bias 
+        w_layer1 = tf.Variable(tf.truncated_normal([in_dim, hidden_dim], stddev=1.0/math.sqrt(float(in_dim))))
+        b_layer1 = tf.Variable(tf.zeros([hidden_dim]))
+        
+        # softmax layer: define weight and bias  
+        w_softmax = tf.Variable(tf.truncated_normal([hidden_dim,out_dim],stddev=1.0/math.sqrt(float(hidden_dim))))
+        b_softmax = tf.Variable(tf.zeros([out_dim]))
+        
+        # 1st hidden layer: fully-connected layer, size = hidden_dim, activation function = tanh
+        layer1 = tf.tanh(tf.matmul(self._observations,w_layer1)+b_layer1)
+        
+        # Assign the output of the softmax layer to the variable 'probs'
+        probs = tf.nn.softmax(tf.matmul(layer1,w_softmax)+b_softmax)
+        
         # <<<<<<<<
 
         # --------------------------------------------------
@@ -72,6 +88,12 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        
+        # self._advantages : accumulated discounted rewards from each timestep to the end of an episode
+        # log_prob : log(pi(a|s)) for all timestep
+        # surr_loss : the surrogate loss
+        surr_loss = tf.reduce_mean(tf.multiply(log_prob,self._advantages))*(-1)
+        
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
