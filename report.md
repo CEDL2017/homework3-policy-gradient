@@ -35,11 +35,11 @@ I added 2 lines in policy.py to implement a 2 layer
 
 surrogate loss:
 
-<p align="center"><img src="sur_loss.PNG" width=80%  height=80%/></p>
+<p align="center"><img src="sur_loss.PNG" width=50%  height=50%/></p>
 
 accumulated discounted rewards:
 
-<p align="center"><img src="acc_dis_rewards.PNG" width=80%  height=80%/></p>
+<p align="center"><img src="acc_dis_rewards.PNG" width=30%  height=30%/></p>
 
 ### Code
 
@@ -58,7 +58,7 @@ I added 1 line in policy.py to compute surrogate loss and assign it to variable 
 
 With bias:
 
-<p align="center"><img src="RL_loss.PNG" width=80%  height=80%/></p>
+<p align="center"><img src="RL_loss.PNG" width=30%  height=30%/></p>
 
 ### Code
 
@@ -311,7 +311,7 @@ run the code below
 
 ### Results
 
-<p align="center"><img src="q5_result.PNG" width=80%  height=80%/></p>
+After Average Return arrived 160, there won't be significant improvments.
 
 
 ## Q6 : Generalized Advantage Estimation
@@ -434,4 +434,4 @@ then Generalized advantage estimator is defined as:
 
 </code>
 
-<p align="center"><img src="q6_result.PNG" width=80%  height=80%/></p>
+<p align="center"><img src="q6_result.PNG" width=30%  height=30%/></p>
