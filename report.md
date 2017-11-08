@@ -71,8 +71,11 @@ We use <b>baseline</b> to reduce the variance of our gradient estimation.
 	<b>Iteration: 91</b>
 
 	<div align="center">
+	
 		<img src = "images/P3_loss_1.png" height=50%>
+		
 		<img src = "images/P3_return_1.png" height=50%>
+		
 	</div>
 
 
@@ -104,17 +107,21 @@ Most of the time removing baseline has fewer iteration than adding baseline.
 
 In order to reduce the variance of the gradient estimator, 
 a constant baseline can be subtracted from the gradient,
+
 <p align="center"><img src = "images/reduce_base.png" height=50%/></p>
 
 To show that this baseline does not introduce bias in the gradient as differentiating 
+
 <p align="center"><img src = "images/diff_base.png" height=50%/></p>
+
 implies that
+
 <p align="center"><img src = "images/final_base.png" height=50%/></p>
 
 Hence, the constant baseline will vanish for infinite data 
 while reducing the variance of the gradient estimator for finite data.
 
-Reference: [Policy gradient methods](http://www.scholarpedia.org/article/Policy_gradient_methods)
+*Reference: [Policy gradient methods]*(http://www.scholarpedia.org/article/Policy_gradient_methods)
 
 
 ## Problem 5: Actor-Critic algorithm (with bootstrapping)
@@ -135,10 +142,10 @@ We change the advantage function in Problem 3 into the function below, using <b>
 
 * <b>Result</b>
 
-<div align="center">
+<p align="center">
 	<img src = "images/P5_loss.png"   height=50%>
 	<img src = "images/P5_return.png" height=50%>
-</div>
+</p>
 
 ## Problem 6: Generalized Advantage Estimation
 We use the previous advantage function in Problem 5 and introduce one hyperparameter λ. 
@@ -149,7 +156,7 @@ We use the previous advantage function in Problem 5 and introduce one hyperparam
 
 * <b>Code</b>
 
-	We use `util.discount` to compute `a` with `LAMBDA`(λ) and `self.discount_rate`(γ).
+	We use `util.discount` to compute `a` with `LAMBDA` ( λ ) and `self.discount_rate` ( γ ).
 
 	```python
 	a = util.discount(a, LAMBDA * self.discount_rate)
@@ -157,7 +164,10 @@ We use the previous advantage function in Problem 5 and introduce one hyperparam
 
 * <b>Result</b>
 
-<div align="center">
-	<img src = "images/P6_loss.png"   height=50%>
-	<img src = "images/P6_return.png" height=50%>
-</div>
+<p align="center">
+
+	<img src = "images/P6_loss.png"   height=50%/>
+	
+	<img src = "images/P6_return.png" height=50%/>
+	
+</p>
