@@ -36,25 +36,22 @@ Change the loss term into:
 
 ###### Results
 
+<p align="center"><img src="imgs/P3.jpg" width=40% /> <img src="imgs/P3 a.jpg" width=40% /> </p>
 
 ##### Problem 4
 Compare the variance and performance before and after adding baseline.
 
-with the baseline
-<p align="center"><img src="imgs/.jpg" width=50% /></p>
+  * with the baseline
+<p align="center"><img src="imgs/P3.jpg" width=40% /> <img src="imgs/P3 a.jpg" width=40% /> </p>
 smaller variance 
 
-be biased
+The baseline minimizes the variance of the gradient estimate, but the baseline does not introduce bias.
 
-without the baseline
-<p align="center"><img src="imgs/.jpg" width=50% /></p>
+  * without the baseline
+<p align="center"><img src="P4loss.png" width=40% /> <img src="P4average.png" width=40% /> </p>
+
 larger variance
 
-unbiased
-
-Why the baseline won't introduce bias?
-
-The baseline minimizes the variance of the gradient estimate, but the baseline does not introduce bias.
 
 ##### Problem 5: Actor-Critic algorithm (with bootstrapping)
 use the one-step bootstrap for the advantage function
@@ -78,5 +75,6 @@ compromise the above two estimation methods(REINFORCE and TD)
 ```
 
 ###### Results
-
+<p align="center"> <img src="imgs/P6.jpg" width=40% /> </p>
+<p align="center"> <img src="imgs/P6curve.jpg" width=40% /> </p>
 
