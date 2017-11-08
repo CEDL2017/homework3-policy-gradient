@@ -58,7 +58,7 @@ I added 1 line in policy.py to compute surrogate loss and assign it to variable 
 
 With bias:
 
-<p align="center"><img src="RL_loss.PNG" width=30%  height=30%/></p>
+<p align="center"><img src="RL_loss.PNG" width=50%  height=50%/></p>
 
 ### Code
 
@@ -320,11 +320,11 @@ After Average Return arrived 160, there won't be significant improvments.
 
 Assume that :
 
-<p align="center"><img src="general1.PNG" width=80%  height=80%/></p>
+<p align="center"><img src="general1.PNG" width=50%  height=50%/></p>
 
 then Generalized advantage estimator is defined as:
 
-<p align="center"><img src="general2.PNG" width=80%  height=80%/></p>
+<p align="center"><img src="general2.PNG" width=50%  height=50%/></p>
 
 
 ### Code
@@ -434,4 +434,4 @@ then Generalized advantage estimator is defined as:
 
 </code>
 
-<p align="center"><img src="q6_result.PNG" width=30%  height=30%/></p>
+<p align="center"><img src="q6_result.PNG" width=80%  height=80%/></p>
