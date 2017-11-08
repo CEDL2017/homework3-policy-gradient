@@ -30,6 +30,9 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        h1 = tf.contrib.layers.fully_connected(self._observations, num_outputs=hidden_dim, activation_fn=tf.tanh)
+        h2 = tf.contrib.layers.fully_connected(h1, num_outputs=out_dim, activation_fn=None)
+        probs = tf.nn.softmax(h2)
         # <<<<<<<<
 
         # --------------------------------------------------
@@ -72,6 +75,14 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        
+        # 1. self._advantages is a vector containing Ri for all timestep.
+        # 2. log_prob is a vector containing log(pi(a|s)) for all timestep.  
+        # 3. Element-wise product of Ri and log_prob.
+        # 4. Sum over time, divide by T to get surrogate loss.
+        neg_log_prob = -log_prob # Minimizing negative log-likelihood is same as maximizing log-likelihood.
+        surr_loss = tf.reduce_mean(neg_log_prob*self._advantages)
+        
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
