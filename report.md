@@ -64,18 +64,15 @@ We use <b>baseline</b> to reduce the variance of our gradient estimation.
 	<b>Iteration: 78</b>
 
 	<div align="center">
-		<img src = "images/P3_loss.png" height=50%>
-		<img src = "images/P3_return.png" height=50%>
+		<img src = "images/P3_loss.PNG" height=50%>
+		<img src = "images/P3_return.PNG" height=50%>
 	</div>
 
 	<b>Iteration: 91</b>
 
-	<div align="center">
-	
-		<img src = "images/P3_loss_1.png" height=50%>
-		
-		<img src = "images/P3_return_1.png" height=50%>
-		
+	<div align="center">	
+		<img src = "images/P3_loss_1.PNG" height=50%>		
+		<img src = "images/P3_return_1.PNG" height=50%>		
 	</div>
 
 
@@ -92,14 +89,14 @@ Most of the time removing baseline has fewer iteration than adding baseline.
 
 	<b>Add baseline</b> (`baseline = LinearFeatureBaseline(env.spec)`)
 	<div align="center">
-		<img src = "images/P3_loss.png" height=50%>
-		<img src = "images/P3_return.png" height=50%>
+		<img src = "images/P3_loss.PNG" height=50%>
+		<img src = "images/P3_return.PNG" height=50%>
 	</div>
 
 	<b>Remove baseline</b> (`baseline = None`)
 	<div align="center">
-		<img src = "images/P4_loss.png" height=50%>
-		<img src = "images/P4_return.png" height=50%>
+		<img src = "images/P4_loss.PNG" height=50%>
+		<img src = "images/P4_return.PNG" height=50%>
 	</div>
 
 ---
@@ -107,16 +104,12 @@ Most of the time removing baseline has fewer iteration than adding baseline.
 
 In order to reduce the variance of the gradient estimator, 
 a constant baseline can be subtracted from the gradient,
-
-<p align="center"><img src = "images/reduce_base.png" height=50%/></p>
+<p align="center"><img src = "images/reduce_base.PNG" height=50%/></p>
 
 To show that this baseline does not introduce bias in the gradient as differentiating 
-
-<p align="center"><img src = "images/diff_base.png" height=50%/></p>
-
+<p align="center"><img src = "images/diff_base.PNG" height=50%/></p>
 implies that
-
-<p align="center"><img src = "images/final_base.png" height=50%/></p>
+<p align="center"><img src = "images/final_base.PNG" height=50%/></p>
 
 Hence, the constant baseline will vanish for infinite data 
 while reducing the variance of the gradient estimator for finite data.
@@ -143,8 +136,8 @@ We change the advantage function in Problem 3 into the function below, using <b>
 * <b>Result</b>
 
 <p align="center">
-	<img src = "images/P5_loss.png"   height=50%>
-	<img src = "images/P5_return.png" height=50%>
+	<img src = "images/P5_loss.PNG"   height=50%>
+	<img src = "images/P5_return.PNG" height=50%>
 </p>
 
 ## Problem 6: Generalized Advantage Estimation
@@ -165,9 +158,6 @@ We use the previous advantage function in Problem 5 and introduce one hyperparam
 * <b>Result</b>
 
 <p align="center">
-
-	<img src = "images/P6_loss.png"   height=50%/>
-	
-	<img src = "images/P6_return.png" height=50%/>
-	
+	<img src = "images/P6_loss.PNG"   height=50%/>	
+	<img src = "images/P6_return.PNG" height=50%/>	
 </p>
