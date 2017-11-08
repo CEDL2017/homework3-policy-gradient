@@ -51,6 +51,7 @@ In problem 5, we modify the advantage from the original version to actor-critic 
 
 ## Problem 6
 In problem 6, we further modify the one-step bootstrap to the form of Generative Advantage Estimation (GAE). After this modification, the agent can achieve to 195 within about 80 iterations, but the average advantage variance is higher than the one in problem 3.
+
 | Loss | Average Return | Average Advantage Variance |
 | ---- | ------ | -------- |
-|![](https://i.imgur.com/rFjgB4E.png) | ![](https://i.imgur.com/O0FqYC9.png) | ![](https://i.imgur.com/uFMMSvU.png)
+| ![](https://i.imgur.com/rFjgB4E.png) | ![](https://i.imgur.com/O0FqYC9.png) | ![](https://i.imgur.com/uFMMSvU.png)
