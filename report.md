@@ -49,10 +49,10 @@ a = util.discount(a, discount_rate*LAMBDA)
 ## Experiments
 all experiment are under the same random seed for environment and network initial weights.
 
-|problem3|problem4|problem5|problem6|
-|---|---|---|---|
-|![](https://i.imgur.com/F1hzpO2.png)|![](https://i.imgur.com/DDDN8qn.png)|![](https://i.imgur.com/Qw1bNwv.png)|![](https://i.imgur.com/TcYEveS.png)|
-|![](https://i.imgur.com/CIgBDGx.png)|![](https://i.imgur.com/aJuHqco.png)|![](https://i.imgur.com/SY5MnRO.png)|![](https://i.imgur.com/v02OZ37.png)||
+|   |problem3|problem4|problem5|problem6|
+|---|---|---|---|---|
+|loss|![](https://i.imgur.com/F1hzpO2.png)|![](https://i.imgur.com/DDDN8qn.png)|![](https://i.imgur.com/Qw1bNwv.png)|![](https://i.imgur.com/TcYEveS.png)|
+|average return|![](https://i.imgur.com/CIgBDGx.png)|![](https://i.imgur.com/aJuHqco.png)|![](https://i.imgur.com/SY5MnRO.png)|![](https://i.imgur.com/v02OZ37.png)||
 
 ## Conclusion
 setting for problem4 converges the fastest in this task. maybe I implement something wrong...
