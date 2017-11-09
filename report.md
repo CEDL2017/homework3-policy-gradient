@@ -77,6 +77,10 @@ In this part, I added 1 line to solve the problem via the given hints.
             a = util.discount(a, LAMBDA * self.discount_rate)
             # <<<<<<<
 ```
+<div align=left>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/7.png" width = "100%" alt=""/>
+</div>
+
 #### Results: 
 <div align=left>
 <img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/8.png" width = "50%" alt=""/>
