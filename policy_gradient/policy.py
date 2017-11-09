@@ -30,6 +30,23 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        with tf.variable_scope("fc1"):
+            weights = tf.get_variable(name="weights", 
+                                      initializer=tf.truncated_normal(shape=[in_dim, hidden_dim]))
+            biases = tf.get_variable(name="biases", 
+                                     initializer=tf.constant(0., shape=[hidden_dim]))
+            logit = tf.nn.xw_plus_b(self._observations, weights, biases)
+            act = tf.tanh(logit)
+        
+        with tf.variable_scope("fc2"):
+            weights = tf.get_variable(name="weights", 
+                                      initializer=tf.truncated_normal(shape=[hidden_dim, out_dim]))
+            biases = tf.get_variable(name="biases", 
+                                     initializer=tf.constant(0., shape=[out_dim]))
+            logit = tf.nn.xw_plus_b(act, weights, biases)
+            softmax = tf.nn.softmax(logit)
+        
+        probs = softmax
         # <<<<<<<<
 
         # --------------------------------------------------
@@ -50,6 +67,7 @@ class CategoricalPolicy(object):
         # 2. Add index of the action chosen at each timestep
         #    e.g., if index of the action chosen at timestep t = 0 is 1, and index of the action
         #    chosen at timestep = 1 is 0, then `action_idxs_flattened` == [0, 2] + [1, 0] = [1, 2]
+        
         action_idxs_flattened += self._actions
 
         # 3. Gather the probability of action at each timestep
@@ -72,6 +90,7 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = -tf.reduce_mean(log_prob*self._advantages)
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
@@ -93,6 +112,17 @@ class CategoricalPolicy(object):
 
         # `action_probs` is an array that has shape [1, action_space], it contains the probability of each action
         # sample an action according to `action_probs`
+        """ 
+        when 
+            action_probs = [0.01, 0.01, 0.97, 0.01]
+        then
+            cs = [0.01, 0.02, 0.99, 1.]
+            cs < random() could return [True, True, False, False] with hige probability
+            idx = 2
+        when 
+            action_probs = [0.25, 0.25, 0.25, 0.25]
+            idx = randint(3)
+        """
         cs = np.cumsum(action_probs)
         idx = sum(cs < np.random.rand())
         return idx
