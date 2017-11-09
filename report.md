@@ -28,11 +28,19 @@ probs = tf.layers.dense(
 > 建立兩個Fully-connected layer 的隱藏層<br>
 > 參考視頻 莫煩<br>
 > https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/5-1-policy-gradient-softmax1/
-<br>
-<br> 
 
-## Problem 2: compute the surrogate loss
+## Problem 2: Compute the surrogate loss
 ```python
 surr_loss = -tf.reduce_mean(log_prob * self._advantages)
 ```
 <p align="left"><img src="https://morvanzhou.github.io/static/results/reinforcement-learning/5-1-1.png" height="200"/></p>
+
+## Problem 3: Use baseline to reduce the variance of our gradient estimate
+```python
+"""
+1. b: values predicted by our baseline
+2. use baselineto reduce variance
+"""
+a = r - b
+```
+> 藉由baseline去對reward進行調整
