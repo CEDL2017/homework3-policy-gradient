@@ -10,8 +10,9 @@ logits = tf.contrib.layers.fully_connected(inputs=fc1, num_outputs=out_dim, scop
 probs = tf.nn.softmax(logits) 
 ```
 ### Problem 2: compute the surrogate loss
-* Follow this formula
-<img src="https://latex.codecogs.com/gif.latex?/L(\\theta)=\\frac{1}{(NT)}(\\sum_{i=1}^N\\sum_{t=0}^Tlog \\pi_ \\theta(a_t^i|s_t^i)*R_t^i)" />   
+* Follow this formula  
+  
+![](http://latex.codecogs.com/gif.latex?L(\\theta)=\\frac{1}{(NT)}(\\sum_{i=1}^N\\sum_{t=0}^Tlog\\pi_\\theta(a_t^i|s_t^i)*R_t^i)) 
 
    
 ```python
