@@ -27,3 +27,14 @@ In this part, I added 1 line to solve the problem via the given hints.
 
 
 ## Problem 3
+In this part, I added 1 line to solve the problem via the given hints.
+In this part, I added 1 line to solve the problem via the given hints.
+```
+         # YOUR CODE HERE >>>>>>
+         a = r - b
+         # <<<<<<<<
+```
+
+<div align=left>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/3.png" width = "100%" alt=""/>
+</div>
