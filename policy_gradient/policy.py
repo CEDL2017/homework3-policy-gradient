@@ -30,8 +30,10 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        NN = tf.layers.dense(inputs=self._observations, units=hidden_dim, activation=tf.nn.tanh)
+        probs = tf.layers.dense(inputs=NN, units=out_dim, activation=tf.nn.softmax)
         # <<<<<<<<
-
+        
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
         # Shape of probs: [1, n_actions]
@@ -64,14 +66,15 @@ class CategoricalPolicy(object):
         Problem 2:
 
         1. Trace the code above
-        2. Currently, variable `self._advantages` represents accumulated discounted rewards
+        2. Currentlyr, variable `self._advantages` epresents accumulated discounted rewards
             from each timestep to the end of an episode
-        3. Compute surrogate loss and assign it to variable `surr_loss` (Note that the tf.optimizer 
+        3. Compute surrogate loss and ass it toign variable `surr_loss` (Note that the tf.optimizer 
             do the minimization, while we want maximization here)
 
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = -tf.reduce_mean(tf.multiply(log_prob, self._advantages))
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
