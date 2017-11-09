@@ -1,7 +1,8 @@
 # Homework3-Policy-Gradient report
 陳冠元(105065530)
 
-## Problem 1: construct a neural network to represent policy
+## Problem 1: construct a neural network to represent policy   
+
 In this part, I use tf.layers.dense() function to build neural networks for solving the problem. Details as follow:
 ```
         # YOUR CODE HERE >>>>>>
@@ -11,7 +12,9 @@ In this part, I use tf.layers.dense() function to build neural networks for solv
         # <<<<<<<<
 ```
 
-## Problem 2: compute the surrogate loss   
+
+## Problem 2: compute the surrogate loss    
+
 In this part, I added 1 line to solve the problem via the given hints.
 ```
         # YOUR CODE HERE >>>>>>
@@ -26,7 +29,8 @@ In this part, I added 1 line to solve the problem via the given hints.
 [Reference](https://github.com/CEDL2017/homework3-policy-gradient/blob/master/Lab3-policy-gradient.ipynb)
 
 
-## Problem 3
+## Problem 3    
+
 In this part, I added 1 line to solve the problem via the given hints.
 ```
          # YOUR CODE HERE >>>>>>
@@ -45,7 +49,7 @@ In this part, I added 1 line to solve the problem via the given hints.
 </div>
 
 
-## Problem 4
+## Problem 4    
 
 #### Results:
 
@@ -63,14 +67,16 @@ The reasons of why the baseline won't introduce bias can be explained as bellow:
 [Reference](http://rll.berkeley.edu/deeprlcourse/)
 
 
-## Problem 5: Actor-Critic algorithm (with bootstrapping)
+## Problem 5: Actor-Critic algorithm (with bootstrapping)    
+
 <div align=left>
 <img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/6.png" width = "100%" alt=""/>
 </div>
 
 #### Results:
 
-## Problem 6: Generalized Advantage Estimation¶
+## Problem 6: Generalized Advantage Estimation¶     
+
 In this part, I added 1 line to solve the problem via the given hints.
 ```
             # YOUR CODE HERE >>>>>>>>
