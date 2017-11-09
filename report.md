@@ -99,3 +99,12 @@ In this part, I added 1 line to solve the problem via the given hints. Refer to 
 <div align=left>
 <img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/8.png" width = "50%" alt=""/>
 </div>
+
+## References:
+[CS 294: Deep Reinforcement Learning, Fall 2017](http://rll.berkeley.edu/deeprlcourse/)   
+   
+[CEDL2017](https://github.com/CEDL2017)
+
+[UCL Course on RL](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html)
+
+[Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures)
