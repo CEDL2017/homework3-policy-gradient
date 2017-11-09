@@ -79,6 +79,10 @@ In this part, we can find when we revise the problem 3 by using the one-step boo
 
 #### Results:
 
+<div align=left>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/9.png" width = "50%" alt=""/>
+</div>
+
 ## Problem 6: Generalized Advantage Estimation¶     
 
 In this part, I added 1 line to solve the problem via the given hints.
