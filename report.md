@@ -28,7 +28,6 @@ In this part, I added 1 line to solve the problem via the given hints.
 
 ## Problem 3
 In this part, I added 1 line to solve the problem via the given hints.
-In this part, I added 1 line to solve the problem via the given hints.
 ```
          # YOUR CODE HERE >>>>>>
          a = r - b
