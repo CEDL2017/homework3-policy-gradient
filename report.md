@@ -69,5 +69,5 @@ target_v = util.discount_cumsum(p["rewards"], self.discount_rate)
 a = r - b     
 a = util.discount(a, self.discount_rate * LAMBDA)
 ```
-
-> 使用GAE的方法，收斂時間會比較久 ()
+<p align="left"><img src="image/p6-1.png" height="250"/><img src="image/p6-2.png" height="250"/></p>
+> 使用GAE的方法，收斂時間會比較久 (95回合收斂)
