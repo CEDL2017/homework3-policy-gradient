@@ -10,3 +10,6 @@ In this part, I use tf.layers.dense() function to build neural networks for solv
         probs = tf.nn.softmax(l2)
         # <<<<<<<<
 ```
+<div align=left>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/p1.PNG" width = "100%" alt=""/>
+</div>
