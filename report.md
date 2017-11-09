@@ -58,7 +58,7 @@ From the result, We can find that after removing the baseline term, the variance
 The reasons of why the baseline won't introduce bias can be explained as bellow:
 
 <div align=left>
-<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/2.PNG" width = "50%" alt=""/>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/2.PNG" width = "100%" alt=""/>
 </div>
 [Reference](http://rll.berkeley.edu/deeprlcourse/)
 
