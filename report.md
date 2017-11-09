@@ -45,3 +45,11 @@ a = r - b
 ```
 > 藉由baseline去對reward進行調整
 <p align="left"><img src="image/p3-1.png" height="250"/><img src="image/p3-2.png" height="250"/></p>
+> 63回合收斂
+
+## Problem 4: Replace baseline with None
+```python
+baseline = None
+```
+<p align="left"><img src="image/p4-1.png" height="250"/><img src="image/p4-2.png" height="250"/></p>
+> 不用baseline對Loss做調整，原本以為會變更差，結果好像也還好 (59回合收斂)
