@@ -31,21 +31,18 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         with tf.variable_scope("fc1"):
-            weights = tf.get_variable(name="weights", 
-                                      initializer=tf.truncated_normal(shape=[in_dim, hidden_dim]))
-            biases = tf.get_variable(name="biases", 
-                                     initializer=tf.constant(0., shape=[hidden_dim]))
+            weights = tf.Variable(tf.truncated_normal(shape=[in_dim, hidden_dim], seed=0))
+            biases = tf.Variable(tf.truncated_normal(shape=[hidden_dim], seed=0))
             logit = tf.nn.xw_plus_b(self._observations, weights, biases)
             act = tf.tanh(logit)
-        
+        self.weights = [weights, biases]
         with tf.variable_scope("fc2"):
-            weights = tf.get_variable(name="weights", 
-                                      initializer=tf.truncated_normal(shape=[hidden_dim, out_dim]))
-            biases = tf.get_variable(name="biases", 
-                                     initializer=tf.constant(0., shape=[out_dim]))
+            weights = tf.Variable(tf.truncated_normal(shape=[hidden_dim, out_dim], seed=0))
+            biases = tf.Variable(tf.truncated_normal(shape=[out_dim], seed=0))
             logit = tf.nn.xw_plus_b(act, weights, biases)
             softmax = tf.nn.softmax(logit)
-        
+        self.weights.append(weights)
+        self.weights.append(biases)
         probs = softmax
         # <<<<<<<<
 
@@ -109,7 +106,7 @@ class CategoricalPolicy(object):
         # expect observation to be of shape [1, observation_space]
         assert observation.shape[0] == 1
         action_probs = self._sess.run(self._act_op, feed_dict={self._observations: observation})
-
+        #print(observation)
         # `action_probs` is an array that has shape [1, action_space], it contains the probability of each action
         # sample an action according to `action_probs`
         """ 
@@ -123,6 +120,8 @@ class CategoricalPolicy(object):
             action_probs = [0.25, 0.25, 0.25, 0.25]
             idx = randint(3)
         """
+        #print('weight:', self._sess.run(self.weights))
+        #print('action prob:', action_probs)
         cs = np.cumsum(action_probs)
         idx = sum(cs < np.random.rand())
         return idx

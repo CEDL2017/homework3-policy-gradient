@@ -32,8 +32,8 @@ def discount_bootstrap(x, discount_rate, b):
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
-    #b = np.concatenate([b,[0]]) 
-    y = x + discount_rate*b 
+    b = np.concatenate([b,[0]]) 
+    y = x + discount_rate*b[1:]
     return y
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
