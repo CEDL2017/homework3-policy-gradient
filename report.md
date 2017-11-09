@@ -43,9 +43,9 @@ surr_loss = -tf.reduce_mean(log_prob * self._advantages)
 """
 a = r - b
 ```
-> 藉由baseline去對reward進行調整
+
 <p align="left"><img src="image/p3-1.png" height="250"/><img src="image/p3-2.png" height="250"/></p>
-> 63回合收斂
+> 藉由baseline去對reward進行調整 (63回合收斂)
 
 ## Problem 4: Replace baseline with None
 ```python
@@ -53,3 +53,21 @@ baseline = None
 ```
 <p align="left"><img src="image/p4-1.png" height="250"/><img src="image/p4-2.png" height="250"/></p>
 > 不用baseline對Loss做調整，原本以為會變更差，結果好像也還好 (59回合收斂)
+
+## Problem 5: Actor-Critic algorithm (with bootstrapping)
+```python
+def discount_bootstrap(x, discount_rate, b):
+    b = np.append(b[1:],0)
+    y = x + discount_rate*b
+    return y
+```
+
+## Problem 6: Generalized Advantage Estimation
+```python
+r = util.discount_bootstrap(p["rewards"], self.discount_rate, b)
+target_v = util.discount_cumsum(p["rewards"], self.discount_rate)
+a = r - b     
+a = util.discount(a, self.discount_rate * LAMBDA)
+```
+
+> 使用GAE的方法，收斂時間會比較久 ()
