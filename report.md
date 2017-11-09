@@ -13,3 +13,7 @@ In this part, I use tf.layers.dense() function to build neural networks for solv
 <div align=left>
 <img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/p1.PNG" width = "100%" alt=""/>
 </div>
+    
+    
+## Problem 2: compute the surrogate loss
+
