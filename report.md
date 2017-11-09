@@ -85,7 +85,7 @@ In this part, we can find when we revise the problem 3 by using the one-step boo
 
 ## Problem 6: Generalized Advantage Estimation¶     
 
-In this part, I added 1 line to solve the problem via the given hints.
+In this part, I added 1 line to solve the problem via the given hints. Refer to the paper ["High-Dimensional Continuous Control Using Generalized Advantage Estimation"](https://arxiv.org/pdf/1506.02438.pdf). The GAE using the hyperparameter λ, to trade-off between bias and variance(bias variance dilemma). As the result, the GAE method can solve the problem within 80 n_iter, and have lower variance than the method of Problem 5 (Actor-Critic algorithm (with bootstrapping)).
 ```
             # YOUR CODE HERE >>>>>>>>
             a = util.discount(a, LAMBDA * self.discount_rate)
