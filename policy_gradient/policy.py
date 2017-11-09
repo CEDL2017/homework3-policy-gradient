@@ -1,4 +1,5 @@
 import tensorflow as tf
+import tensorflow.contrib.slim as slim
 import numpy as np
 
 # In this Lab, we just use categorical policy, which used for MDPs with discrete action space
@@ -30,6 +31,8 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        x = slim.fully_connected(self._observations, hidden_dim, activation_fn=tf.nn.tanh, scope='policy/fc_1')
+        probs = slim.fully_connected(x, out_dim, activation_fn=tf.nn.softmax, scope='policy/fc_2')
         # <<<<<<<<
 
         # --------------------------------------------------
@@ -72,6 +75,7 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = - tf.reduce_mean(log_prob * self._advantages)
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)

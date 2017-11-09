@@ -27,17 +27,33 @@ def discount_bootstrap(x, discount_rate, b):
         x: the immediate reward for each timestep. e.g. [1, 1, 0]
         discount_factor: the \gamma in standard reinforcement learning
         b: the prediction of the baseline. e.g. [1.3, 0.4, 0.2]
-    Returns: a numpy array y = r(s_t,a,s_{t+1}) + \gamma*V_t 
+    Returns: a numpy array y = r(s_t,a,s_{t+1}) + \gamma*V_t
              (the shape of it should be the same as the `x` and `b`)
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    left_shift_arr = lambda arr, shift: np.hstack([arr[shift:], [0]*shift])
+    # return x + discount_rate * left_shift_arr(b, 1)
+    return x + discount_rate * left_shift_arr(b, 1)
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
 def plot_curve(data, key, filename=None):
     # plot the surrogate loss curve
     x = np.arange(len(data))
     plt.plot(x, data)
+    plt.xlabel("iterations")
+    plt.ylabel(key)
+    if filename is not None:
+        plt.savefig(filename)
+    plt.show()
+    plt.close()
+
+def plot_curves(data_dict, key, filename=None):
+    # plot the surrogate loss curve
+    for data_label in data_dict:
+        x = np.arange(len(data_dict[data_label]))
+        plt.plot(x, data_dict[data_label])
+        plt.text(x[-1], data_dict[data_label][-1], data_label)
     plt.xlabel("iterations")
     plt.ylabel(key)
     if filename is not None:
