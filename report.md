@@ -68,7 +68,7 @@ The reasons of why the baseline won't introduce bias can be explained as bellow:
 
 
 ## Problem 5: Actor-Critic algorithm (with bootstrapping)    
-In this part, we can find when we revise the problem 3 by using the one-step bootstrap for the advantage function. It become very shaky, and it cannot solve the problem within 200 n_iter
+In this part, we can find when we revise the problem 3 by using the one-step bootstrap for the advantage function, it become very shaky, and it cannot solve the problem within 200 n_iter.
 
 <div align=left>
 <img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/6.png" width = "80%" alt=""/>
