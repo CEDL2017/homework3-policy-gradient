@@ -30,8 +30,11 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        fc1 = tf.layers.dense(self._observations, units=hidden_dim, activation=tf.nn.tanh)
+        fc2 = tf.layers.dense(fc1, units=out_dim, activation=None)
+        
+        probs = tf.nn.softmax(fc2)
         # <<<<<<<<
-
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
         # Shape of probs: [1, n_actions]
@@ -73,7 +76,8 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
-
+        surr_loss = -tf.reduce_mean(log_prob * self._advantages) 
+        
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
 
