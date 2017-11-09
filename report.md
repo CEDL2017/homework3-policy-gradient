@@ -51,19 +51,22 @@ In this part, I added 1 line to solve the problem via the given hints.
 
 ## Problem 4    
 
+From the result, We can find that after removing the baseline term, the variance become higher, even though the avg. return at the same level.  
+
+
 #### Results:
 
 <div align=left>
 <img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/5.png" width = "50%" alt=""/>
 </div>
 
-From the result, We can find that after removing the baseline term, the variance become higher, even though the avg. return at the same level.  
 
 The reasons of why the baseline won't introduce bias can be explained as bellow:
 
 <div align=left>
 <img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/2.PNG" width = "80%" alt=""/>
 </div>
+
 [Reference](http://rll.berkeley.edu/deeprlcourse/)
 
 
