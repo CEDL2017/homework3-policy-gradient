@@ -31,8 +31,11 @@ def discount_bootstrap(x, discount_rate, b):
              (the shape of it should be the same as the `x` and `b`)
     Sample code should be about 3 lines
     """
-    # YOUR CODE >>>>>>>>>>>>>>>>>>>
-    # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    b_list = list(b)
+    b_tplus1 = b_list[1:]
+    b_tplus1.append(b_list[-1])
+    b_tplus1 = np.asarray(b_tplus1)
+    return x + discount_rate*b_tplus1
  
 def plot_curve(data, key, filename=None):
     # plot the surrogate loss curve
@@ -42,9 +45,11 @@ def plot_curve(data, key, filename=None):
     plt.ylabel(key)
     if filename is not None:
         plt.savefig(filename)
+    plt.savefig('./results/'+key+'.png')
     plt.show()
     plt.close()
+    
 
 def discount(x, discount_factor):
-    return scipy.signal.lfilter([1.0], [1.0, -discount_factor], x[::-1])[::-1]
+    return lfilter([1.0], [1.0, -discount_factor], x[::-1])[::-1]
 

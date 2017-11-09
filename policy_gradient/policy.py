@@ -8,16 +8,17 @@ class CategoricalPolicy(object):
     def __init__(self, in_dim, out_dim, hidden_dim, optimizer, session):
 
         # Placeholder Inputs
-        self._observations = tf.placeholder(tf.float32, shape=[None, in_dim], name="observations")
-        self._actions = tf.placeholder(tf.int32, name="actions")
-        self._advantages = tf.placeholder(tf.float32, name="advantages")
+        with tf.name_scope('inputs'):
+            self._observations = tf.placeholder(tf.float32, shape=[None, in_dim], name="observations")
+            self._actions = tf.placeholder(tf.int32, name="actions")
+            self._advantages = tf.placeholder(tf.float32, name="advantages")
 
         self._opt = optimizer
         self._sess = session
 
+        
         """
-        Problem 1:
-
+        
         1. Use TensorFlow to construct a 2-layer neural network as stochastic policy.
             The hidden layer should be fully-connected and have size `hidden_dim`.
             Use tanh as the activation function of the first hidden layer, and append softmax layer after the output
@@ -29,8 +30,28 @@ class CategoricalPolicy(object):
 
         Sample solution is about 2~4 lines.
         """
-        # YOUR CODE HERE >>>>>>
-        # <<<<<<<<
+
+        # Problem 1:
+        # fc1
+        layer = tf.layers.dense(
+            inputs = self._observations,
+            units = hidden_dim,
+            activation = tf.nn.tanh,  # tanh activation
+            kernel_initializer = tf.random_normal_initializer(mean=0, stddev=0.3),
+            bias_initializer = tf.constant_initializer(0.1),
+            name='fc1'
+        )
+        # fc2
+        all_act = tf.layers.dense(
+            inputs = layer,
+            units = out_dim,
+            activation = None,
+            kernel_initializer = tf.random_normal_initializer(mean=0, stddev=0.3),
+            bias_initializer = tf.constant_initializer(0.1),
+            name='fc2'
+        )
+
+        probs = tf.nn.softmax(all_act, name='probs')  # use softmax to convert to probability
 
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
@@ -60,6 +81,7 @@ class CategoricalPolicy(object):
         # Add 1e-8 to `probs_vec` so as to prevent log(0) error
         log_prob = tf.log(probs_vec + 1e-8)
 
+
         """
         Problem 2:
 
@@ -71,9 +93,7 @@ class CategoricalPolicy(object):
 
         Sample solution is about 1~3 lines.
         """
-        # YOUR CODE HERE >>>>>>
-        # <<<<<<<<
-
+        surr_loss = tf.reduce_mean(-log_prob * self._advantages)  # reward guided loss
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
 
