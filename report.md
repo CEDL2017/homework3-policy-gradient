@@ -64,4 +64,20 @@ The reasons of why the baseline won't introduce bias can be explained as bellow:
 
 
 ## Problem 5: Actor-Critic algorithm (with bootstrapping)
+<div align=left>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/6.png" width = "100%" alt=""/>
+</div>
 
+#### Results:
+
+## Problem 6: Generalized Advantage Estimation¶
+In this part, I added 1 line to solve the problem via the given hints.
+```
+            # YOUR CODE HERE >>>>>>>>
+            a = util.discount(a, LAMBDA * self.discount_rate)
+            # <<<<<<<
+```
+#### Results: 
+<div align=left>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/8.png" width = "50%" alt=""/>
+</div>
