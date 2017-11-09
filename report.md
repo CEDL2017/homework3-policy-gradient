@@ -5,7 +5,7 @@
 
 
 ### Overview:
->This homework is about policy gradient. Base on policy gradient, Actor-Critic algorithm and Generalized Advantage Estimation (GAE) methods are  extensions.
+>This homework is about policy gradient. Based on policy gradient, Actor-Critic algorithm and Generalized Advantage Estimation (GAE) methods are  extensions.
 
 #### For problem.4, compare reducing baseline results wih not do this:
 **Without baseline: </br>**
@@ -18,9 +18,9 @@ See lower variance in reducing baseline results. For reducing baseline, it achie
 
 **explain why the baseline won't introduce bias:** </br>
 If we take gradient on the policy loss with baseine reduction, we can observe: </br>
-<img src="imgs/add_baseline.jpg"  width="300px"> </br>
+<img src="imgs/add_baseline.JPG"  width="300px"> </br>
 We know the first term grad(logP*R) has no bias. Then, for the last term, that can be derived: </br>
-<img src="imgs/derived.jpg"  width="300px">, which shows no bias included.
+<img src="imgs/derived.JPG"  width="300px">, which shows no bias included.
 
  
 
