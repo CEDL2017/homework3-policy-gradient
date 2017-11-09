@@ -14,7 +14,7 @@
 **With reducing baseline: </br>**
 <img src="imgs/loss_reduce.png"  width="300px">
 <img src="imgs/return_reduce.png"  width="300px"> </br>
-See lower variance in reducing baseline results. For reducing baseline, it achieve successful performance early (from Retrun figures).</br>
+See lower variance in reducing baseline results (smooth curves). For reducing baseline, it achieve successful performance early (from Retrun figures).</br>
 
 **explain why the baseline won't introduce bias:** </br>
 If we take gradient on the policy loss with baseine reduction, we can observe: </br>
