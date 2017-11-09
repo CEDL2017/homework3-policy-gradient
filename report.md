@@ -9,7 +9,7 @@ if the reward is bigger than the baseline prediction, the probability will incre
 
 Problem 4
 
-In this problem, we replace the baseline with linearFeatureBseline.
+In this problem, we replace the baseline linearFeatureBseline with none.
 And, without the baseline, we can see that the variation is bigger than the previous experiment. Therefore, the loss seems to converge more difficultly.
 
 
