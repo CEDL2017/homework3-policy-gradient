@@ -15,6 +15,6 @@ And, without the baseline, we can see that the variation is bigger than the prev
 
 Problem 5,6
 
-In the previous problem, we use the baseline to reduce the variance. In this problem, we are going to use the one-step bootstrap to solve the problem. We will make each timestep's reward add on the multiplication of discount_rate and baseline prediction to make it the new r(reward). For problem 6, we just simply change the 1-step to i-step bootstrapping.
+In the previous problem, we use the baseline to reduce the variance. In this problem, we are going to use the one-step bootstrap to solve the problem. We will make each timestep's reward add on the multiplication of discount_rate and baseline prediction to make it the new r(reward). For problem 6, we just simply introduce the GAE which will use lambda to compromise the above methods.
 
 
