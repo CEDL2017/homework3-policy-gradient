@@ -30,8 +30,10 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        hid1 = tf.contrib.layers.fully_connected(self._observations, hidden_dim, activation_fn=tf.nn.tanh)
+        probs = tf.contrib.layers.fully_connected(hid1, out_dim, activation_fn=tf.nn.softmax)
         # <<<<<<<<
-
+        
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
         # Shape of probs: [1, n_actions]
@@ -55,11 +57,13 @@ class CategoricalPolicy(object):
         # 3. Gather the probability of action at each timestep
         #    e.g., tf.reshape(probs, [-1]) == [0.1, 0.9, 0.8, 0.2]
         #    since action_idxs_flattened == [1, 2], we'll get [0.9, 0.8], which is the probability when we choose each action
+        
         probs_vec = tf.gather(tf.reshape(probs, [-1]), action_idxs_flattened)
+        # probs_vec = tf.dynamic_partition(tf.reshape(probs, [-1]), action_idxs_flattened, 1)
 
         # Add 1e-8 to `probs_vec` so as to prevent log(0) error
         log_prob = tf.log(probs_vec + 1e-8)
-
+        
         """
         Problem 2:
 
@@ -72,6 +76,8 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = tf.reduce_mean(tf.multiply(log_prob, self._advantages))
+        surr_loss = -1.0 * surr_loss
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
