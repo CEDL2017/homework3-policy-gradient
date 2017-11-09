@@ -30,6 +30,9 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        fc1 = tf.contrib.layers.fully_connected(inputs=self._observations, num_outputs=hidden_dim, scope='fc1', activation_fn=tf.nn.tanh)
+        logits = tf.contrib.layers.fully_connected(inputs=fc1, num_outputs=out_dim, scope='fc2', activation_fn=None)
+        probs = tf.nn.softmax(logits) 
         # <<<<<<<<
 
         # --------------------------------------------------
@@ -72,8 +75,9 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
-        # <<<<<<<<
+        surr_loss = -tf.reduce_mean(log_prob*self._advantages)
 
+        # <<<<<<<<
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
 
