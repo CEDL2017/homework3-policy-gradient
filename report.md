@@ -25,11 +25,11 @@ This just compare the reward I get with baseline.I'd test two times,and found th
 ```
 1st Result :
 
-<p align="center"><img src="result/with_BL.jpg.JPG" height="300"/></p>
+<p align="center"><img src="result/with_BL.jpg" height="300"/></p>
 
 2nd Result :
 
-<p align="center"><img src="result/with_BLv2.jpg.JPG" height="300"/></p>
+<p align="center"><img src="result/with_BLv2.jpg" height="300"/></p>
 
 
 # Problem 4: No baseline version
@@ -43,21 +43,29 @@ I test two times as problem 3.
 ```
 1st Result :
 
-<p align="center"><img src="result/without_BL.jpg.JPG" height="300"/></p>
+<p align="center"><img src="result/without_BL.jpg" height="300"/></p>
 
 2nd Result :
 
-<p align="center"><img src="result/without_BLv2.jpg.JPG" height="300"/></p>
+<p align="center"><img src="result/without_BLv2.jpg" height="300"/></p>
 
 # Problem 5: Actor-Critic algorithm (with bootstrapping)
 One-step bootstrap for the advantage function.<br>
 It took really long time (200iteration),but the variance very low.<br>
+```
+	b_next = np.append(b[1:], 0) 
+	y = x + discount_rate * b_next 
+	return y
+```
 Result :
 
 <p align="center"><img src="result/ac.jpg" height="300"/></p>
 
 # Problem 6: Generalized Advantage Estimation
 This method which 'performance of average return' quickly increase and converge fast (60 iteration)<br>
+```
+a = util.discount(a, LAMBDA* self.discount_rate)
+```
 Result :
 
 <p align="center"><img src="result/adv_est.jpg" height="300"/></p>
