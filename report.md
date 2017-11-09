@@ -14,7 +14,7 @@ code:
 
 Problem 2: Compute the surrogate loss
 
- <p align="center"><img src="images/3_2.PNG" width=50%/></p>
+ <p align="center"><img src="3_2.PNG" width=50%/></p>
  
 code:
 
@@ -24,7 +24,7 @@ code:
  
  Use baseline to reduce the variance of our gradient estimate.
 
- <p align="center"><img src="images/3_3.PNG" width=50%/></p>
+ <p align="center"><img src="3_3.PNG" width=50%/></p>
  
 code:
 
@@ -33,8 +33,8 @@ result:
 
 Solve at 70 iterations, which equals 7000 episodes. 
 
-<p align="center"><img src="images/3_3_1.PNG" width=50%/></p>
-<p align="center"><img src="images/3_3_2.PNG" width=50%/></p>
+<p align="center"><img src="3_3_1.PNG" width=50%/></p>
+<p align="center"><img src="3_3_2.PNG" width=50%/></p>
  
 Problem 4: Remove baseline
 
@@ -44,19 +44,19 @@ result:
 
 baseline = LinearFeatureBaseline(env.spec)
 
-<p align="center"><img src="images/3_3_1.PNG" width=50%/></p>
-<p align="center"><img src="images/3_3_2.PNG" width=50%/></p>
+<p align="center"><img src="3_3_1.PNG" width=50%/></p>
+<p align="center"><img src="3_3_2.PNG" width=50%/></p>
 
 baseline = None
 
-<p align="center"><img src="images/3_4_1.PNG" width=50%/></p>
-<p align="center"><img src="images/3_4_2.PNG" width=50%/></p>
+<p align="center"><img src="3_4_1.PNG" width=50%/></p>
+<p align="center"><img src="3_4_2.PNG" width=50%/></p>
 
 
 Problem 5: Actor-Critic algorithm (with bootstrapping)
  We use the one-step bootstrap for the advantage function
  
- <p align="center"><img src="images/3_5.PNG" height=50%/></p>
+ <p align="center"><img src="3_5.PNG" height=50%/></p>
  
  code:
 
@@ -69,7 +69,7 @@ Problem 5: Actor-Critic algorithm (with bootstrapping)
  Problem 6: Generalized Advantage Estimationwe 
  we use a novel advantage function called "Generalized Advantage Estimation", which introduces one hyperparameter  λ  to compromise the above two estimation methods.
  
- <p align="center"><img src="images/3_6.PNG" height=50%/></p>
+ <p align="center"><img src="3_6.PNG" height=50%/></p>
  
  code:
       
@@ -79,4 +79,4 @@ result:
 
 Solve at 57 iterations, which equals 5700 episodes.
 
-<p align="center"><img src="images/6.PNG" width=50%/></p>
+<p align="center"><img src="6.PNG" width=50%/></p>
