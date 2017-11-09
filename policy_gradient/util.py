@@ -32,8 +32,14 @@ def discount_bootstrap(x, discount_rate, b):
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    y = np.zeros(x.shape)
+    for i in range(x.shape[0] -1):
+        y[i] = x[i] +discount_rate *b[i+1]
+    y[-1] = x[-1]
+    return y
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
+
 def plot_curve(data, key, filename=None):
     # plot the surrogate loss curve
     x = np.arange(len(data))

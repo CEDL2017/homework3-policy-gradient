@@ -30,8 +30,13 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        self.fc1 = tf.layers.dense(inputs=self._observations, units=hidden_dim, activation=tf.nn.tanh, name="fc1")
+        probs = tf.layers.dense(inputs=self.fc1, units=out_dim, activation=tf.nn.softmax, name="fc2")
+        # self.fc1 = tf.contrib.fully_connected(self._observations, hidden_dim, activation=tf.nn.tanh, scope="fc1")
+        # probs = tf.contrib.fully_connected(self.fc1, out_dim, activation=tf.nn.softmax, scope="fc2")
+        # probs = fully_connected(network, out_dim, activation='softmax')
         # <<<<<<<<
-
+        
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
         # Shape of probs: [1, n_actions]
@@ -72,6 +77,14 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        # loss2rew = tf.multiply(log_prob, self._advantages)
+        # loss2rew = tf.multiply(self._advantages, log_prob)
+        loss2rew = log_prob * self._advantages
+        # surr_loss = -loss2rew
+        # surr_loss = -tf.reduce_max(loss2rew)
+        surr_loss = -tf.reduce_mean(loss2rew)
+        # topk, _ = tf.nn.top_k(loss2rew, k=int(tf.size(loss2rew) / loss2rew.shape[0] / 5))  # top 20%
+        # surr_loss = -tf.reduce_mean(topk)
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
