@@ -35,4 +35,4 @@ probs = tf.layers.dense(
 ```python
 surr_loss = -tf.reduce_mean(log_prob * self._advantages)
 ```
-<p align="center"><img src="https://morvanzhou.github.io/static/results/reinforcement-learning/5-1-1.png" height="150"/></p>
+<p align="left"><img src="https://morvanzhou.github.io/static/results/reinforcement-learning/5-1-1.png" height="200"/></p>
