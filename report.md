@@ -26,6 +26,7 @@ probs = tf.layers.dense(
 ```
 
 > 建立兩個Fully-connected layer 的隱藏層<br>
-> (參考周莫凡 https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/5-1-policy-gradient-softmax1/)
+> 參考視頻 周莫凡<br>
+> https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/5-1-policy-gradient-softmax1/)
 <br>
 <br> 
