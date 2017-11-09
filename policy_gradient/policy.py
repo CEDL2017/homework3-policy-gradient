@@ -32,6 +32,10 @@ class CategoricalPolicy(object):
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
 
+        
+        hidden_out = tf.layers.dense(self._observations, hidden_dim, tf.nn.tanh)
+        probs = tf.layers.dense(hidden_out, out_dim, tf.nn.softmax)
+        
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
         # Shape of probs: [1, n_actions]
@@ -73,9 +77,13 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
+        surr_loss = -tf.reduce_sum(tf.multiply(log_prob, self._advantages))/tf.to_float(tf.shape(self._advantages))
 
+        
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
+
+
 
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
