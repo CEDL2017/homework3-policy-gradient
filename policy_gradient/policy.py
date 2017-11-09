@@ -31,7 +31,35 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
+        
+        
+        # fc1
+        layer1 = tf.layers.dense(
+            inputs=self._observations,
+            units=hidden_dim,
+            activation=tf.nn.tanh,  # tanh activation
+            kernel_initializer=tf.random_normal_initializer(mean=0, stddev=0.3),
+            bias_initializer=tf.constant_initializer(0.1),
+            name='fc1'
+        )
+        # fc2
+        probs = tf.layers.dense(
+            inputs=layer1,
+            units=out_dim,
+            activation=tf.nn.softmax,
+            kernel_initializer=tf.random_normal_initializer(mean=0, stddev=0.3),
+            bias_initializer=tf.constant_initializer(0.1),
+            name='fc2'
+        )
 
+        #probs = tf.nn.softmax(all_act, name='act_prob')  # use softmax to convert to probability
+                
+        '''
+        nn_activations = tf.contrib.layers.fully_connected(self._observations, hidden_dim, activation_fn=tf.tanh)
+        probs = nn_activations = tf.contrib.layers.fully_connected(nn_activations, out_dim, activation_fn=tf.nn.softmax)
+        '''
+        
+        # 山頭水覆疑無路, 柳暗花明又一村
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
         # Shape of probs: [1, n_actions]
@@ -72,8 +100,10 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
-        # <<<<<<<<
-
+        #莫凡5.2 4:23        
+        surr_loss = -tf.reduce_mean(log_prob * self._advantages)        
+        # <<<<<<<<       
+        
         grads_and_vars = self._opt.compute_gradients(surr_loss)
         train_op = self._opt.apply_gradients(grads_and_vars, name="train_op")
 
