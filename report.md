@@ -68,4 +68,4 @@ a = util.discount(a, LAMBDA* self.discount_rate)
 ```
 Result :
 
-<p align="center"><img src="result/adv_est.jpg" height="300"/></p>
+<p align="center"><img src="result/adv_est.jpg" /></p>
