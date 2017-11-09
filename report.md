@@ -146,6 +146,7 @@ Problem 5: Actor-Critic algorithm (with bootstrapping)
          a = util.discount(a,self.discount_rate*LAMBDA)
 
 result:
+
 Iteration 1: Average Return = 31.35
 Iteration 2: Average Return = 32.09
 Iteration 3: Average Return = 32.83
