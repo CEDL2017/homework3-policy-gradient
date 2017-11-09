@@ -23,7 +23,7 @@ In this part, I added 1 line to solve the problem via the given hints.
 ```
 
 <div align=left>
-<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/p1.PNG" width = "100%" alt=""/>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/p1.PNG" width = "80%" alt=""/>
 </div>
     
 [Reference](https://github.com/CEDL2017/homework3-policy-gradient/blob/master/Lab3-policy-gradient.ipynb)
@@ -39,7 +39,7 @@ In this part, I added 1 line to solve the problem via the given hints.
 ```
 
 <div align=left>
-<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/3.png" width = "100%" alt=""/>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/3.png" width = "80%" alt=""/>
 </div>
 
 #### Results:
@@ -62,15 +62,16 @@ From the result, We can find that after removing the baseline term, the variance
 The reasons of why the baseline won't introduce bias can be explained as bellow:
 
 <div align=left>
-<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/2.PNG" width = "100%" alt=""/>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/2.PNG" width = "80%" alt=""/>
 </div>
 [Reference](http://rll.berkeley.edu/deeprlcourse/)
 
 
 ## Problem 5: Actor-Critic algorithm (with bootstrapping)    
+In this part, we can find when we revise the problem 3 by using the one-step bootstrap for the advantage function. It become very shaky, and it cannot solve the problem within 200 n_iter
 
 <div align=left>
-<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/6.png" width = "100%" alt=""/>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/6.png" width = "80%" alt=""/>
 </div>
 
 #### Results:
@@ -84,7 +85,7 @@ In this part, I added 1 line to solve the problem via the given hints.
             # <<<<<<<
 ```
 <div align=left>
-<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/7.png" width = "100%" alt=""/>
+<img src="https://github.com/guan-yuan/homework3-policy-gradient/blob/master/outputs/7.png" width = "80%" alt=""/>
 </div>
 
 #### Results: 
