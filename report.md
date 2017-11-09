@@ -44,4 +44,4 @@ surr_loss = -tf.reduce_mean(log_prob * self._advantages)
 a = r - b
 ```
 > 藉由baseline去對reward進行調整
-<p align="left"><img src="image/p3-1.png" height="200"/></p><img src="image/p3-2.png" height="200"/></p>
+<p align="left"><img src="image/p3-1.png" height="250"/><img src="image/p3-2.png" height="250"/></p>
