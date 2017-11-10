@@ -142,4 +142,4 @@ a = util.discount(a, self.discount_rate * LAMBDA)
 GAE的算法是將前面兩種reward方式(high variance, low bias和low variance, high bias)結合。
 最後結果如下:
 
-<img src="images/loss_GAE.PNG" width=300/> <img src="images/return_GAE.PNG"  width=300/>
+<img src="images/loss_GAE.PNG" width=300/> <img src="images/return_GAE.PNG" width=300/>
