@@ -30,6 +30,8 @@ class CategoricalPolicy(object):
         Sample solution is about 2~4 lines.
         """
         # YOUR CODE HERE >>>>>>
+        hidden1 = tf.layers.dense(inputs=self._observations, units=hidden_dim, activation=tf.nn.tanh)
+        probs = tf.layers.dense(inputs=hidden1, units=out_dim, activation=tf.nn.softmax)
         # <<<<<<<<
 
         # --------------------------------------------------
@@ -72,6 +74,7 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = -tf.reduce_mean(self._advantages * log_prob)
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
