@@ -32,7 +32,9 @@ def discount_bootstrap(x, discount_rate, b):
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
-    # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    b_sift = np.roll(b, -1)
+    b_sift[-1] = 0.0
+    return x + discount_rate * b_sift
  
 def plot_curve(data, key, filename=None):
     # plot the surrogate loss curve
