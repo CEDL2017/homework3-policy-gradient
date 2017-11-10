@@ -32,6 +32,10 @@ def discount_bootstrap(x, discount_rate, b):
     Sample code should be about 3 lines
     """
     # YOUR CODE >>>>>>>>>>>>>>>>>>>
+    y = [ x[t] + discount_rate*b[t+1] for t in range(len(x)-1)]
+    y.append(x[-1])
+            
+    return np.array(y)
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
 def plot_curve(data, key, filename=None):
