@@ -34,6 +34,14 @@ a = r - b
 
 加上baseline並不會改變原本的expectation: 
 
+<img src="images/surr_loss.PNG" width="300"/>
+
+把 r 換成 r - b 之後，增加的項就是負的 <img src="images/baseline.PNG" width="150"/>
+
+而這項的結果是0，推導如下:
+
+<img src="images/baseline_0.PNG" width="800"/>
+
 
 ## Problem 5: Actor-Critic Algorithm (With Bootstrapping)
 
