@@ -36,5 +36,28 @@ p["advantages"] = (a - a.mean()) / (a.std() + 1e-8) # normalize
 
 在reward 減掉 baseline，多了這一項
 
-baseline只要跟action無關，微分後都是0，完全不影響結果。
+baseline只要跟action無關，微分後都是0，完全不影響結果。所以baseline並不會造成bias。
 
+### 2. Compare with no baseline
+
+With baseline
+
+
+Without baseline
+
+## Problem 5 : Actor-Critic Algorithm (With Bootstrapping)
+
+```
+b_sift = np.roll(b, -1)
+b_sift[-1] = 0.0
+return x + discount_rate * b_sift
+```
+這邊的方法進一部減少variance。本來的方法是將本次time_step到未來的immediate reward全部加總，但是全部都用sample的結果會有很高的variance。為了解決，這裡只有本次time_step用immediate reward，後面的部份則用，下一個time_step estimate的value function，來代替。因為value function是多次sample學習的結果，不會變動太大，variance可以下降，但是也造成一些bias。
+
+
+## Problem 6 : Generalized Advantage Estimation
+
+```
+a = util.discount(a, self.discount_rate * LAMBDA)
+```
+這個方法是將problem3和problem5的方法結合在一起，用一個Lambda做權重。
