@@ -31,6 +31,11 @@ class CategoricalPolicy(object):
         """
         # YOUR CODE HERE >>>>>>
         # <<<<<<<<
+        hidden1 = tf.layers.dense(inputs=self._observations, units=hidden_dim, activation=tf.nn.tanh, name='hidden1')
+        #hidden2 = tf.layers.dense(inputs=hidden1, units=out_dim, activation=tf.nn.tanh, name='hidden2')
+        #mistake tf.nn.tanh as the activation function for the second layer
+        hidden2 = tf.layers.dense(inputs=hidden1, units=out_dim, activation=None, name='hidden2')
+        probs = tf.nn.softmax(hidden2)
 
         # --------------------------------------------------
         # This operation (variable) is used when choosing action during data sampling phase
@@ -72,6 +77,7 @@ class CategoricalPolicy(object):
         Sample solution is about 1~3 lines.
         """
         # YOUR CODE HERE >>>>>>
+        surr_loss = -tf.reduce_mean(self._advantages * log_prob)
         # <<<<<<<<
 
         grads_and_vars = self._opt.compute_gradients(surr_loss)
